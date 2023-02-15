@@ -1,0 +1,38 @@
+body {
+  background-color: #353740;
+}
+
+.screen-centered-el {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.btn-custom-1 {
+  color: white;
+  background-color: #712cf9;
+  border-color: #712cf9;
+  font-weight: 600;
+}
+
+.btn-custom-1:hover {
+  color: white;
+  background-color: #5a18df;
+  border-color: #5a18df;
+}
+
+.btn-custom-2 {
+  color: white;
+  background-color: #11ae6c;
+  border-color: #11ae6c;
+  font-weight: 600;
+}
+
+.btn-custom-2:hover {
+  color: white;
+  background-color: #069258;
+  border-color: #069258;
+}
+

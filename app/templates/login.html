@@ -1,0 +1,50 @@
+{% extends 'index.html' %} {% block body %}
+<div class="screen-centered-el">
+  <div>
+    {% if messages %}
+    <div class="card bg-danger text-white">
+      {% for message in messages %}
+      <div class="card-body" style="font-weight: 600">{{ message }}</div>
+      {% endfor %} {% endif %}
+    </div>
+    <form action="{% url 'login' %}" method="post" style="width: 350px">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next }}" />
+      <i class="bi bi-translate" style="font-size: 8em; color: white"></i>
+      <div class="form-floating m-2">
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          placeholder="."
+          value="{{ form.email.0 }}"
+        />
+        <label>Email address</label>
+      </div>
+      <div class="form-floating m-2">
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          placeholder="."
+          value="{{ form.password.0 }}"
+        />
+        <label>Password</label>
+      </div>
+      <input
+        type="submit"
+        value="Log in"
+        class="btn btn-primary btn-custom-1 m-2"
+        style="width: 335px"
+      />
+      <a
+        class="btn btn-primary btn-custom-2 m-2"
+        href="{% url 'signup' %}"
+        style="width: 335px"
+      >
+        Sign up
+      </a>
+    </form>
+  </div>
+</div>
+{% endblock %}
