@@ -1,0 +1,15 @@
+<nav class="navbar navbar-dark bg-dark py-1 px-3">
+  <i class="bi bi-translate" style="font-size: 2em; color: white"></i>
+  <div>
+    <a href="#" data-bs-toggle="dropdown">
+      <i class="bi bi-person-circle" style="font-size: 2em; color: white"></i>
+    </a>
+    <ul
+      class="dropdown-menu text-small dropdown-menu-end"
+      style=""
+    >
+      <li><a class="dropdown-item" href="{% url 'logout' %}">Profile</a></li>
+      <li><a class="dropdown-item" href="{% url 'logout' %}">Log out</a></li>
+    </ul>
+  </div>
+</nav>

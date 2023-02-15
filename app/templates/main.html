@@ -1,1 +1,63 @@
-hello
+{% extends 'index.html' %} {% block body %} {% include 'partials/navbar.html' %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card text-white bg-dark my-5">
+        <div class="card-header card-header-custom" style="text-align: right">
+          {{ fromL_disp }} &nbsp; &nbsp;
+          <span>
+            <a href="{% url "main" %}?fromL={{ toL }}&toL={{ fromL }}">
+              <i class="bi bi-arrow-left-right" id="arrowIcon"></i>
+            </a>
+          </span>
+        </div>
+        <div class="card-body">
+          <form
+            action="{% url 'translate' %}"
+            method="post"
+            style="height: 60vh"
+          >
+            {% csrf_token %}
+            <textarea
+              class="input-custom"
+              placeholder="Start typing here..."
+            ></textarea>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card text-white bg-dark my-5">
+        <div class="card-header card-header-custom">
+            <div style="display: flex; justify-content: space-between;">
+                <div class="mt-1">{{ toL_disp }}</div>
+                {% if toL != "EN" %}
+                    <span style="text-align: right;"><div class="btn-group btn-group-sm" role="group">
+                        {% if toL == 'FID' %}
+                        <a type="button" href="{% url "main" %}?fromL={{ fromL }}&toL=FID" class="btn btn-primary btn-custom-2">Formal</a>
+                        <a type="button" href="{% url "main" %}?fromL={{ fromL }}&toL=CID" class="btn btn-secondary btn-custom-3">Colloquial</a>
+                        {% else %}
+                        <a type="button" href="{% url "main" %}?fromL={{ fromL }}&toL=FID" class="btn btn-primary btn-custom-3">Formal</a>
+                        <a type="button" href="{% url "main" %}?fromL={{ fromL }}&toL=CID" class="btn btn-secondary btn-custom-2">Colloquial</a>
+                        {% endif %}
+                    </div></span>
+                {% endif %}
+              </div>
+        </div>
+        <div class="card-body">
+          <form
+            action="{% url 'translate' %}"
+            method="post"
+            style="height: 60vh"
+          >
+            {% csrf_token %}
+            <textarea class="input-custom" readonly></textarea>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h3></h3>
+</div>
+
+{% endblock %}
