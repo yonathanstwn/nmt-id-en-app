@@ -1,0 +1,64 @@
+{% extends 'index.html' %} {% block body %} {% include 'partials/navbar.html' %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card text-white bg-dark mt-5">
+        <div class="card-header card-header-custom">
+          <div>
+            <div class="mt-1">{{ fromL_disp }}</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div style="height: 23vh">
+            <textarea class="input-custom" readonly>{{ sourceText }}</textarea>
+          </div>
+        </div>
+      </div>
+      <div class="card text-white bg-dark mt-4">
+        <div class="card-header card-header-custom">
+          <div>
+            <div class="mt-1">{{ toL_disp }}</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div style="height: 23.5vh">
+            <textarea class="input-custom" readonly>{{ outText }}</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card text-white bg-dark mt-5">
+        <div class="card-header card-header-custom">
+          <div class="mt-1">{{ toL_disp }}</div>
+        </div>
+        <div class="card-body">
+          <div style="height: 60vh">
+            <textarea
+              class="input-custom"
+              placeholder="Give the correct translation here..."
+              name="feedbackText"
+              form="feedbackTextForm"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <form action="{% url 'feedback' %}" method="post" id="feedbackTextForm">
+        {% csrf_token %}
+        <input type="hidden" name="fromL" value="{{fromL}}" />
+        <input type="hidden" name="toL" value="{{toL}}" />
+        <input type="hidden" name="sourceText" value="{{sourceText}}" />
+        <input
+          type="submit"
+          value="Submit feedback"
+          class="btn btn-primary btn-custom-1 my-2 bg-danger"
+          style="width: 100%; border-color: #dc3545"
+        />
+      </form>
+    </div>
+  </div>
+  <h3></h3>
+</div>
+
+{% endblock %}

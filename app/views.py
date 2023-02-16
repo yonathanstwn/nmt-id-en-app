@@ -6,6 +6,7 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from googletrans import Translator
 
 
 def login_prohibited(view_function):
@@ -17,10 +18,7 @@ def login_prohibited(view_function):
     return modified_view_function
 
 
-def _process_lang_params(request):
-    fromL = request.GET.get('fromL') or 'EN'
-    toL = request.GET.get('toL') or 'FID'
-
+def _process_lang_params(fromL, toL):
     # Language list
     # FID: Formal Indonesian
     # CID: Colloquial Indonesian
@@ -58,13 +56,43 @@ def _process_lang_params(request):
 
 @login_required
 def main(request):
-    response_data = _process_lang_params(request)
-    return render(request, 'main.html', response_data)
+    if request.method == 'GET':
+        fromL = request.GET.get('fromL') or 'EN'
+        toL = request.GET.get('toL') or 'FID'
+        response_data = _process_lang_params(fromL, toL)
+        return render(request, 'main.html', response_data)
+    else:
+        translator = Translator()
+        fromL = request.POST['fromL']
+        toL = request.POST['toL']
+        srcText = request.POST['sourceText']
+        outText = ''
+        if srcText:
+            if fromL == 'FID' or fromL == 'CID':
+                outText = translator.translate(
+                    srcText, src='id', dest='en').text
+            else:
+                outText = translator.translate(
+                    srcText, src='en', dest='id').text
+        response_data = _process_lang_params(fromL, toL)
+        return render(request, 'main.html', {**response_data, 'sourceText': srcText, 'outText': outText})
 
+def _retrain_model(feedbackText):
+    pass
 
 @login_required
-def translate(request):
-    pass
+def feedback(request):
+    if request.POST.get('action') == 'redirect':
+        fromL = request.POST['fromL']
+        toL = request.POST['toL']
+        srcText = request.POST['sourceText']
+        outText = request.POST['outText']
+        response_data = _process_lang_params(fromL, toL)
+        return render(request, 'feedback.html', {**response_data, 'sourceText': srcText, 'outText': outText})
+    else:
+        feedbackText = request.POST['feedbackText']
+        _retrain_model(feedbackText)
+        return redirect('main')
 
 
 @login_prohibited

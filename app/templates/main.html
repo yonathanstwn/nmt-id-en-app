@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <div class="card text-white bg-dark my-5">
+      <div class="card text-white bg-dark mt-5">
         <div class="card-header card-header-custom" style="text-align: right">
           {{ fromL_disp }} &nbsp; &nbsp;
           <span>
@@ -12,22 +12,36 @@
           </span>
         </div>
         <div class="card-body">
-          <form
-            action="{% url 'translate' %}"
-            method="post"
+          <div
             style="height: 60vh"
           >
-            {% csrf_token %}
             <textarea
               class="input-custom"
               placeholder="Start typing here..."
-            ></textarea>
-          </form>
+                name="sourceText"
+                form="sourceTextForm"
+            >{{sourceText}}</textarea>
+        </div>
         </div>
       </div>
+      <form
+            action="{% url 'main' %}"
+            method="post"
+            id="sourceTextForm"
+          >
+            {% csrf_token %}
+        <input type="hidden" name="fromL" value="{{fromL}}" />
+        <input type="hidden" name="toL" value="{{toL}}" />
+        <input
+            type="submit"
+            value="Translate"
+            class="btn btn-primary btn-custom-1 my-2"
+            style="width: 100%"
+        />
+    </form>
     </div>
     <div class="col">
-      <div class="card text-white bg-dark my-5">
+      <div class="card text-white bg-dark mt-5">
         <div class="card-header card-header-custom">
             <div style="display: flex; justify-content: space-between;">
                 <div class="mt-1">{{ toL_disp }}</div>
@@ -45,16 +59,32 @@
               </div>
         </div>
         <div class="card-body">
-          <form
-            action="{% url 'translate' %}"
-            method="post"
-            style="height: 60vh"
-          >
-            {% csrf_token %}
-            <textarea class="input-custom" readonly></textarea>
-          </form>
+          <div style="height: 60vh">
+            <textarea class="input-custom" readonly>{{ outText }}</textarea>
+          </div>
         </div>
       </div>
+      {% if outText|length != 0 %}
+        <form
+                action="{% url 'feedback' %}"
+                method="post"
+                style="height: 60vh"
+                id="sourceTextForm"
+            >
+                {% csrf_token %}
+            <input type="hidden" name="fromL" value="{{fromL}}" />
+            <input type="hidden" name="toL" value="{{toL}}" />
+            <input type="hidden" name="sourceText" value="{{sourceText}}" />
+            <input type="hidden" name="outText" value="{{outText}}" />
+            <input type="hidden" name="action" value="redirect" />
+            <input
+                type="submit"
+                value="Wrong translation?"
+                class="btn btn-primary btn-custom-2 my-2"
+                style="width: 100%"
+            />
+        </form>
+    {% endif %}
     </div>
   </div>
   <h3></h3>
