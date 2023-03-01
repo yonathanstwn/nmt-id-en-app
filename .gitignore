@@ -261,3 +261,7 @@ poetry.toml
 .ruff_cache/
 
 # End of https://www.toptal.com/developers/gitignore/api/python,django
+
+# Exclude models folder contents except for README.md
+Transformers/models/*
+!Transformers/models/README.md
