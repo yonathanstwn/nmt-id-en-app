@@ -8,8 +8,7 @@ import json
 # https://huggingface.co/docs/transformers/tasks/translation
 
 # File script config
-DOWNLOAD_MODEL = False
-DOWNLOAD_DATASET = True
+DOWNLOAD_MODEL = True
 TRAIN_MODEL = True
 HF_MODEL_REPOSITORY = "Helsinki-NLP/opus-mt-en-id"
 MODEL_FILEPATH = "./models/opus-mt-en-id"
