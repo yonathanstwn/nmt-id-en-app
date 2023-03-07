@@ -303,3 +303,6 @@ Temporary Items
 # Exclude models folder contents except for README.md
 Transformers/models/*
 !Transformers/models/README.md
+
+# Exclude access_tokens.json containing secret API tokens
+access_tokens.json

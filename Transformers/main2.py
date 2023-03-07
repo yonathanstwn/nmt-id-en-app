@@ -2,6 +2,7 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, DataCollatorForSe
 from datasets import load_dataset
 import evaluate
 import numpy as np
+import json
 
 # Code highly inspired from the tutorial:
 # https://huggingface.co/docs/transformers/tasks/translation
@@ -13,7 +14,14 @@ TRAIN_MODEL = True
 HF_MODEL_REPOSITORY = "Helsinki-NLP/opus-mt-en-id"
 MODEL_FILEPATH = "./models/opus-mt-en-id"
 HF_DATASET_REPOSITORY = "yhavinga/ccmatrix"
-DATASET_FILEPATH = './datasets/ccmatrix-en-id'
+
+# Get tokens from access_tokens.json file
+# Raise exception if file is not found
+try:
+    with open('access_tokens.json', 'r') as f:
+        ACCESS_TOKENS = json.load(f)
+except FileNotFoundError as e:
+    raise Exception("Please read README.md to configure your HuggingFace access tokens")
 
 if DOWNLOAD_MODEL:
     # Download from HuggingFace repository
@@ -77,16 +85,18 @@ def compute_metrics(eval_preds):
 
 # Train model
 training_args = Seq2SeqTrainingArguments(
-    output_dir='models/opus-mt-en-id-ccmatrix-lr-4',
+    output_dir='models/opus-mt-en-id-ccmatrix-lr-3',
     evaluation_strategy="epoch",
     save_strategy='epoch',
-    learning_rate=1e-4,
+    learning_rate=1e-3,
     per_device_train_batch_size=32,
     per_device_eval_batch_size=32,
     weight_decay=0.01,
-    num_train_epochs=2,
+    num_train_epochs=3,
     predict_with_generate=True,
-    load_best_model_at_end=True
+    load_best_model_at_end=True,
+    push_to_hub=True,
+    hub_token=ACCESS_TOKENS['upload_token']
 )
 
 trainer = Seq2SeqTrainer(
