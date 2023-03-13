@@ -306,3 +306,6 @@ Transformers/models/*
 
 # Exclude access_tokens.json containing secret API tokens
 access_tokens.json
+
+# Exclude VS Code configuration files
+.vscode

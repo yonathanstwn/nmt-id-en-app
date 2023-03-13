@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#SBATCH --output=/scratch/users/%u/train-opus-mt-en-id-ccmatrix-lr-4.out
+#SBATCH --output=/scratch/users/%u/train-opus-mt-en-id-ccmatrix-lr-5.out
 #SBATCH --job-name=fypTrain
 #SBATCH --time=0-48:00
 export TRANSFORMERS_CACHE=/scratch/users/k2036348/.cache
@@ -9,4 +9,4 @@ source /users/${USER}/.bashrc
 source activate /scratch/users/k2036348/nmt-id-en-app/venv
 cd /scratch/users/k2036348/nmt-id-en-app/
 cd Transformers/
-python main.py TRAIN_OPUS_EN_ID_CCMATRIX_LR_4
+python main.py TRAIN_OPUS_ID_EN_CCMATRIX

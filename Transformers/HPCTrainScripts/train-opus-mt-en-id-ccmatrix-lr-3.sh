@@ -9,4 +9,4 @@ source /users/${USER}/.bashrc
 source activate /scratch/users/k2036348/nmt-id-en-app/venv
 cd /scratch/users/k2036348/nmt-id-en-app/
 cd Transformers/
-python main2.py
+python main.py TRAIN_OPUS_EN_ID_CCMATRIX_LR_3
