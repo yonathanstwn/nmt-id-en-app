@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#SBATCH --output=/scratch/users/%u/train-opus-mt-en-id-ccmatrix-lr-5/%j.out
+#SBATCH --output=/scratch/users/%u/JobOut/train-opus-mt-en-id-ccmatrix-lr-5/%j.out
 #SBATCH --job-name=fypTrain
 #SBATCH --time=0-48:00
 export TRANSFORMERS_CACHE=/scratch/users/k2036348/.cache
