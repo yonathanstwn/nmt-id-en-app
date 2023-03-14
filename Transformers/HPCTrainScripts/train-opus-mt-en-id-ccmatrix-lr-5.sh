@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#SBATCH --output=/scratch/users/%u/train-opus-mt-en-id-ccmatrix-lr-5.out
+#SBATCH --output=/scratch/users/%u/train-opus-mt-en-id-ccmatrix-lr-5/%j.out
 #SBATCH --job-name=fypTrain
 #SBATCH --time=0-48:00
 #SBATCH --gres=gpu
