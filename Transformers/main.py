@@ -27,25 +27,21 @@ def main(runner_config):
 
     # Helsinki-OPUS-en-id model finetuned with ccmatrix dataset using varying learning rates
     if runner_config == RunnerConfig.TRAIN_OPUS_EN_ID_CCMATRIX_LR_3.value:
-        dataset = datasetLoaders.get_ccmatrix_train_val_ds(
-            'en-id', size=1_000_000)
+        dataset = datasetLoaders.get_ccmatrix_train_val_ds(size=1_000_000)
         api.train("Helsinki-NLP/opus-mt-en-id",
                   'opus-mt-en-id-ccmatrix-lr-3', dataset, 'en-id', lr=1e-3)
     elif runner_config == RunnerConfig.TRAIN_OPUS_EN_ID_CCMATRIX_LR_4.value:
-        dataset = datasetLoaders.get_ccmatrix_train_val_ds(
-            'en-id', size=1_000_000)
+        dataset = datasetLoaders.get_ccmatrix_train_val_ds(size=1_000_000)
         api.train("Helsinki-NLP/opus-mt-en-id",
                   'opus-mt-en-id-ccmatrix-lr-4', dataset, 'en-id')
     elif runner_config == RunnerConfig.TRAIN_OPUS_EN_ID_CCMATRIX_LR_5.value:
-        dataset = datasetLoaders.get_ccmatrix_train_val_ds(
-            'en-id', size=1_000_000)
+        dataset = datasetLoaders.get_ccmatrix_train_val_ds(size=1_000_000)
         api.train("Helsinki-NLP/opus-mt-en-id",
                   'opus-mt-en-id-ccmatrix-lr-5', dataset, 'en-id', lr=1e-5)
     
     # Helsinki-OPUS-id-en model finetuned with ccmatrix with optimum learning rate
     elif runner_config == RunnerConfig.TRAIN_OPUS_ID_EN_CCMATRIX.value:
-        dataset = datasetLoaders.get_ccmatrix_train_val_ds(
-            'id-en', size=1_000_000)
+        dataset = datasetLoaders.get_ccmatrix_train_val_ds(size=1_000_000)
         api.train("Helsinki-NLP/opus-mt-id-en",
                   'opus-mt-id-en-ccmatrix', dataset, 'id-en')
 

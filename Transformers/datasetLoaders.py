@@ -23,9 +23,9 @@ from datasets import load_dataset
 ####### Train and Validation Datasets #######
 #############################################
 
-def get_ccmatrix_train_val_ds(lang_pair, size=1_000_000, split='train', split_percentage=0.1):
+def get_ccmatrix_train_val_ds(size=1_000_000, split='train', split_percentage=0.1):
     """Load "yhavinga/ccmatrix" dataset for training and validation datasets"""
-    dataset = load_dataset("yhavinga/ccmatrix", lang_pair, split=split).select(
+    dataset = load_dataset("yhavinga/ccmatrix", 'en-id', split=split).select(
         range(size)).train_test_split(test_size=split_percentage, shuffle=False)
     dataset['validation'] = dataset.pop('test')
     return dataset
