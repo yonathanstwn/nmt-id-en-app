@@ -3,6 +3,14 @@
 This folder contains bash scripts to be run on the KCL CREATE High-Performance Cluster (HPC).
 For more information: https://docs.er.kcl.ac.uk/CREATE/running_jobs/
 
+To submit a job using a CPU, run:
+
+`sbatch -p cpu <BASH_FILE>.sh`
+
+To submit a job using a GPU, run:
+
+`sbatch -p gpu <BASH_FILE>.sh`
+
 # Environment
 
 It is recommended to use Conda as the package manager in the HPC.
