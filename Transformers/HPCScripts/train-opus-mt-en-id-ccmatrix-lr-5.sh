@@ -7,6 +7,7 @@
 export TRANSFORMERS_CACHE=/scratch/users/k2036348/.cache
 export HF_HOME=/scratch/users/k2036348/.cache
 module load anaconda3/2021.05-gcc-9.4.0
+module load cuda
 source /users/${USER}/.bashrc
 source activate /scratch/users/k2036348/nmt-id-en-app/Transformers/HPCScripts/venv
 git lfs install
