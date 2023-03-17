@@ -138,7 +138,7 @@ def init_training_args(model_name, upload_token, lr, epochs_n):
         load_best_model_at_end=True,
         push_to_hub=True,
         hub_token=upload_token,
-        hub_strategy="checkpoint"
+        hub_strategy="all_checkpoints"
     )
 
 
