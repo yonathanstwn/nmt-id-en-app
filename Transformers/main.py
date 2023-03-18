@@ -16,10 +16,9 @@ class RunnerConfig(Enum):
     TRAIN_OPUS_EN_ID_CCMATRIX_LR_4 = 'TRAIN_OPUS_EN_ID_CCMATRIX_LR_4'
     TRAIN_OPUS_EN_ID_CCMATRIX_LR_5 = 'TRAIN_OPUS_EN_ID_CCMATRIX_LR_5'
 
-    # Helsinki-OPUS-id-en model finetuned with ccmatrix with optimum learning rate
-    TRAIN_OPUS_ID_EN_CCMATRIX = 'TRAIN_OPUS_ID_EN_CCMATRIX'
-    
-    #
+    # Helsinki-OPUS-id-en model finetuned with ccmatrix with warmup steps and no warmup steps
+    TRAIN_OPUS_ID_EN_CCMATRIX_WARMUP = 'TRAIN_OPUS_ID_EN_CCMATRIX_WARMUP'
+    TRAIN_OPUS_ID_EN_CCMATRIX_NO_WARMUP = 'TRAIN_OPUS_ID_EN_CCMATRIX_NO_WARMUP'
 
 
 def main(runner_config):
@@ -38,12 +37,16 @@ def main(runner_config):
         dataset = datasetLoaders.get_ccmatrix_train_val_ds(size=1_000_000)
         api.train("Helsinki-NLP/opus-mt-en-id",
                   'opus-mt-en-id-ccmatrix-lr-5', dataset, 'en-id', lr=1e-5)
-    
-    # Helsinki-OPUS-id-en model finetuned with ccmatrix with optimum learning rate
-    elif runner_config == RunnerConfig.TRAIN_OPUS_ID_EN_CCMATRIX.value:
+
+    # Helsinki-OPUS-id-en model finetuned with ccmatrix with warmup steps and no warmup steps
+    elif runner_config == RunnerConfig.TRAIN_OPUS_ID_EN_CCMATRIX_WARMUP.value:
         dataset = datasetLoaders.get_ccmatrix_train_val_ds(size=1_000_000)
         api.train("Helsinki-NLP/opus-mt-id-en",
-                  'opus-mt-id-en-ccmatrix', dataset, 'id-en')
+                  'opus-mt-id-en-ccmatrix-warmup', dataset, 'id-en')
+    elif runner_config == RunnerConfig.TRAIN_OPUS_ID_EN_CCMATRIX_NO_WARMUP.value:
+        dataset = datasetLoaders.get_ccmatrix_train_val_ds(size=1_000_000)
+        api.train("Helsinki-NLP/opus-mt-id-en",
+                  'opus-mt-id-en-ccmatrix-no-warmup', dataset, 'id-en')
 
 
 if __name__ == '__main__':

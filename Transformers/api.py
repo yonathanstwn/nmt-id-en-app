@@ -24,7 +24,10 @@ def train(hf_model_repo,
         model_name, access_tokens['upload_token'], lr, epochs_n)
     trainer = utils.init_trainer(model, training_args, tokenized_dataset, tokenizer, compute_metrics_function)
     trainer.train()
+    trainer.push_to_hub()
 
+def test(dataset):
+    pass
 
 def translate(model, tokenizer, input_text):
     """Main translate function to translate an input text"""
