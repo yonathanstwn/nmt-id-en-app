@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#SBATCH --output=/scratch/users/%u/JobOut/%j-train-opus-mt-id-en-ccmatrix.out
+#SBATCH --output=/scratch/users/%u/JobOut/%j-train-opus-mt-id-en-ccmatrix-warmup.out
 #SBATCH --job-name=fypTrain
 #SBATCH --time=0-48:00
 #SBATCH --mem=10000
@@ -13,4 +13,4 @@ source activate /scratch/users/k2036348/nmt-id-en-app/Transformers/HPCScripts/ve
 git lfs install
 cd /scratch/users/k2036348/nmt-id-en-app/
 cd Transformers/
-python main.py TRAIN_OPUS_ID_EN_CCMATRIX
+python main.py TRAIN_OPUS_ID_EN_CCMATRIX_WARMUP
