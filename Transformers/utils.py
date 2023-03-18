@@ -136,9 +136,10 @@ def init_training_args(model_name, upload_token, lr, epochs_n):
         num_train_epochs=epochs_n,
         predict_with_generate=True,
         load_best_model_at_end=True,
+        save_total_limit=2,
         push_to_hub=True,
         hub_token=upload_token,
-        hub_strategy="all_checkpoints"
+        hub_strategy="checkpoint"
     )
 
 
