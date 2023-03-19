@@ -78,4 +78,3 @@ def get_tatoeba_test_ds():
     dataset = load_dataset("Helsinki-NLP/tatoeba_mt", "eng-ind")
     dataset.pop('validation')
     return dataset
-
