@@ -10,7 +10,8 @@ def train(hf_model_repo,
           dataset,
           lang_pair,
           lr=1e-4,
-          epochs_n=25
+          epochs_n=25,
+          warmup_steps=4000
           ):
     """
     Main train function to train/finetune a HuggingFace pretrained model 
@@ -21,7 +22,7 @@ def train(hf_model_repo,
     tokenized_dataset = utils.tokenize_dataset(dataset, tokenizer, lang_pair)
     compute_metrics_function = utils.create_compute_metrics_function(tokenizer)
     training_args = utils.init_training_args(
-        model_name, access_tokens['upload_token'], lr, epochs_n)
+        model_name, access_tokens['upload_token'], lr, epochs_n, warmup_steps)
     trainer = utils.init_trainer(model, training_args, tokenized_dataset, tokenizer, compute_metrics_function)
     trainer.train()
     trainer.push_to_hub()

@@ -115,7 +115,7 @@ def create_compute_metrics_function(tokenizer):
     return compute_metrics
 
 
-def init_training_args(model_name, upload_token, lr, epochs_n):
+def init_training_args(model_name, upload_token, lr, epochs_n, warmup_steps):
     """Initialise an object containing the training arguments/hyperparameters"""
     return Seq2SeqTrainingArguments(
         output_dir='models/' + model_name,
@@ -128,7 +128,7 @@ def init_training_args(model_name, upload_token, lr, epochs_n):
         adam_beta2=0.999,
         adam_epsilon=1e-8,
         lr_scheduler_type="linear",
-        warmup_steps=4000,
+        warmup_steps=warmup_steps,
         generation_num_beams=4,
         per_device_train_batch_size=32,
         per_device_eval_batch_size=32,
