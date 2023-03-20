@@ -32,6 +32,12 @@ class RunnerConfig(Enum):
     # Helsinki-OPUS-id-en model finetuned with OpenSubtitles with default hyperparameters
     TRAIN_OPUS_ID_EN_OPEN_SUBTITLES = 'TRAIN_OPUS_ID_EN_OPEN_SUBTITLES'
 
+    # Helsinki-OPUS-en-id model finetuned with "jakartaresearch/inglish" with lr=1e-5 as it is optimal from previous training stats
+    TRAIN_OPUS_EN_ID_JAKARTA = 'TRAIN_OPUS_EN_ID_JAKARTA'
+
+    # Helsinki-OPUS-id-en model finetuned with "jakartaresearch/inglish" with lr=1e-5 as it is optimal from previous training stats
+    TRAIN_OPUS_ID_EN_JAKARTA = 'TRAIN_OPUS_ID_EN_JAKARTA'
+
 
 def main(runner_config):
     """Main runner function which simply matches training configuration to the corresponding function calls"""
@@ -107,6 +113,26 @@ def main(runner_config):
         dataset = datasetLoaders.get_open_subtitles_train_val_ds()
         api.train("Helsinki-NLP/opus-mt-id-en",
                   'opus-mt-id-en-open-subtitles', dataset, 'id-en')
+        
+    ###################################################
+    ###### JAKARTA ENGLISH -> INDONESIAN ##############
+    ###################################################
+
+    # Helsinki-OPUS-en-id model finetuned with "jakartaresearch/inglish" with lr=1e-5 as it is optimal from previous training stats
+    elif runner_config == RunnerConfig.TRAIN_OPUS_EN_ID_JAKARTA.value:
+        dataset = datasetLoaders.get_jakarta_research_inglish_train_val_ds()
+        api.train("Helsinki-NLP/opus-mt-en-id",
+                  'opus-mt-en-id-jakarta', dataset, 'en-id', lr=1e-5)
+
+    ###################################################
+    ###### JAKARTA INDONESIAN -> ENGLISH ##############
+    ###################################################
+
+    # Helsinki-OPUS-id-en model finetuned with "jakartaresearch/inglish" with lr=1e-5 as it is optimal from previous training stats
+    elif runner_config == RunnerConfig.TRAIN_OPUS_ID_EN_JAKARTA.value:
+        dataset = datasetLoaders.get_jakarta_research_inglish_train_val_ds()
+        api.train("Helsinki-NLP/opus-mt-id-en",
+                  'opus-mt-id-en-jakarta', dataset, 'id-en', lr=1e-5)
 
 
 if __name__ == '__main__':
