@@ -20,6 +20,12 @@ class RunnerConfig(Enum):
     TRAIN_OPUS_ID_EN_CCMATRIX_WARMUP = 'TRAIN_OPUS_ID_EN_CCMATRIX_WARMUP'
     TRAIN_OPUS_ID_EN_CCMATRIX_NO_WARMUP = 'TRAIN_OPUS_ID_EN_CCMATRIX_NO_WARMUP'
 
+    # Helsinki-OPUS-en-id model finetuned with ccmatrix dataset with lr=1e-5 and 10M training examples
+    TRAIN_OPUS_EN_ID_CCMATRIX_V2 = 'TRAIN_OPUS_EN_ID_CCMATRIX_V2'
+
+    # Helsinki-OPUS-id-en model finetuned with ccmatrix dataset with lr=1e-5 and 10M training examples
+    TRAIN_OPUS_ID_EN_CCMATRIX_V2 = 'TRAIN_OPUS_ID_EN_CCMATRIX_V2'
+
     # Helsinki-OPUS-en-id model finetuned with OPUS100 with default hyperparameters
     TRAIN_OPUS_EN_ID_OPUS100 = 'TRAIN_OPUS_EN_ID_OPUS100'
 
@@ -59,6 +65,10 @@ def main(runner_config):
         dataset = datasetLoaders.get_ccmatrix_train_val_ds()
         api.train("Helsinki-NLP/opus-mt-en-id",
                   'opus-mt-en-id-ccmatrix-lr-5', dataset, 'en-id', lr=1e-5)
+    elif runner_config == RunnerConfig.TRAIN_OPUS_EN_ID_CCMATRIX_V2.value:
+        dataset = datasetLoaders.get_ccmatrix_train_val_ds(size=10_000_000, split_percentage=0.05)
+        api.train("Helsinki-NLP/opus-mt-en-id",
+                  'opus-mt-en-id-ccmatrix-v2', dataset, 'en-id', lr=1e-5)
 
     ############################################
     ###### CCMATRIX INDONESIAN -> ENGLISH ######
@@ -73,6 +83,10 @@ def main(runner_config):
         dataset = datasetLoaders.get_ccmatrix_train_val_ds()
         api.train("Helsinki-NLP/opus-mt-id-en",
                   'opus-mt-id-en-ccmatrix-no-warmup', dataset, 'id-en', warmup_steps=0)
+    elif runner_config == RunnerConfig.TRAIN_OPUS_ID_EN_CCMATRIX_V2.value:
+        dataset = datasetLoaders.get_ccmatrix_train_val_ds(size=10_000_000, split_percentage=0.05)
+        api.train("Helsinki-NLP/opus-mt-id-en",
+                  'opus-mt-id-en-ccmatrix-v2', dataset, 'id-en', lr=1e-5)
 
     ############################################
     ###### OPUS100 ENGLISH -> INDONESIAN #######
