@@ -304,8 +304,9 @@ Temporary Items
 Transformers/models/*
 !Transformers/models/README.md
 
-# Exclude access_tokens.json containing secret API tokens
+# Exclude json files containing secret API tokens
 access_tokens.json
+api_key.json
 
 # Exclude VS Code configuration files
 .vscode
