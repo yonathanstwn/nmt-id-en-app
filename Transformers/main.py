@@ -66,9 +66,9 @@ def main(runner_config):
         api.train("Helsinki-NLP/opus-mt-en-id",
                   'opus-mt-en-id-ccmatrix-lr-5', dataset, 'en-id', lr=1e-5)
     elif runner_config == RunnerConfig.TRAIN_OPUS_EN_ID_CCMATRIX_V2.value:
-        dataset = datasetLoaders.get_ccmatrix_train_val_ds(size=10_000_000, split_percentage=0.05)
+        dataset = datasetLoaders.get_ccmatrix_train_val_ds(size=5_000_000, split_percentage=0.05)
         api.train("Helsinki-NLP/opus-mt-en-id",
-                  'opus-mt-en-id-ccmatrix-v2', dataset, 'en-id', lr=1e-5)
+                  'opus-mt-en-id-ccmatrix-v2', dataset, 'en-id', lr=1e-5, epochs_n=5)
 
     ############################################
     ###### CCMATRIX INDONESIAN -> ENGLISH ######
@@ -84,9 +84,9 @@ def main(runner_config):
         api.train("Helsinki-NLP/opus-mt-id-en",
                   'opus-mt-id-en-ccmatrix-no-warmup', dataset, 'id-en', warmup_steps=0)
     elif runner_config == RunnerConfig.TRAIN_OPUS_ID_EN_CCMATRIX_V2.value:
-        dataset = datasetLoaders.get_ccmatrix_train_val_ds(size=10_000_000, split_percentage=0.05)
+        dataset = datasetLoaders.get_ccmatrix_train_val_ds(size=5_000_000, split_percentage=0.05)
         api.train("Helsinki-NLP/opus-mt-id-en",
-                  'opus-mt-id-en-ccmatrix-v2', dataset, 'id-en', lr=1e-5)
+                  'opus-mt-id-en-ccmatrix-v2', dataset, 'id-en', lr=1e-5, epochs_n=5)
 
     ############################################
     ###### OPUS100 ENGLISH -> INDONESIAN #######
