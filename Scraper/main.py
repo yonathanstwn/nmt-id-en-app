@@ -7,6 +7,7 @@ import json
 from datasets import load_dataset
 import sqlalchemy as db
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, Session
+from sqlalchemy import select
 
 
 class Base(DeclarativeBase):
@@ -32,6 +33,18 @@ class Translation(Base):
 
     def __repr__(self) -> str:
         return f"Translation(id={self.id!r}, english={self.english!r}, formal_indo={self.formal_indo!r}, colloquial_indo={self.colloquial_indo!r})"
+
+
+def print_database():
+    """Utility function to view database during execution"""
+    # Database connection
+    engine = db.create_engine("sqlite:///db.sqlite", echo=True)
+    # Create session object to interact with database
+    session = Session(engine)
+    # View database
+    stmt = select(Translation)
+    for row in session.scalars(stmt):
+        print(row)
 
 
 def init_database():
@@ -70,6 +83,9 @@ def send_gpt_prompt(english_sentence):
         ]
     )
 
+def send_gpt_prompt_safe(english_sentence):
+    """Implements a safety try-except block to handle bad connection issues""" 
+
 
 def insert_to_database(session, english_sentence, formal_indo_sentence, colloquial_indo_sentence):
     """Add translation record/row based on parameters to the database"""
@@ -86,7 +102,7 @@ def main():
 
     session = init_database()
     setup_openai_key()
-    dataset = load_open_subtitles_dataset(0, 25_000)
+    dataset = load_open_subtitles_dataset(0, 15)
     dataset_size = len(dataset)
 
     success_count = 0
@@ -98,15 +114,16 @@ def main():
         if len(english_sentence) <= CHAR_LIMIT:
             response = send_gpt_prompt(english_sentence)
             colloquial_indo_sentence = response['choices'][0]['message']['content']
-            insert_to_database(session, english_sentence, formal_indo_sentence, colloquial_indo_sentence)
+            insert_to_database(session, english_sentence,
+                               formal_indo_sentence, colloquial_indo_sentence)
             success_count += 1
         else:
             skipped_count += 1
-        
-        # Logging progress
-        print(f"skipped: {skipped_count}, success: {success_count}, total: {dataset_size}")
 
-        
+        # Logging progress
+        print(
+            f"skipped: {skipped_count}, success: {success_count}, total: {dataset_size}")
+
 
 if __name__ == '__main__':
     main()

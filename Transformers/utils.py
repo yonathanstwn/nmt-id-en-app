@@ -13,18 +13,28 @@ import json
 import os
 
 
-def load_model_and_tokenizer(hf_repo, force_download=False):
-    """Download model and tokenizer if not downloaded yet, otherwise load them from local directory"""
+def load_model_and_tokenizer(hf_repo, base_model_dir=None, **kwargs):
+    """
+    Download model and tokenizer if not downloaded yet, otherwise load them from local directory.
+    The base model save directory can be optionally set as well.
+    Additional **kwargs can be passed, e.g. for NLLB tokenizer where you need to specify the source and target languages.
+    """
+    # Default directory name
     local_dir = "./models/" + hf_repo.split("/")[1]
-    if os.path.exists(local_dir) and os.path.isdir(local_dir) and not force_download:
+    if base_model_dir:
+        # Custom directory name if passed
+        local_dir = "./models/" + base_model_dir
+    if os.path.exists(local_dir) and os.path.isdir(local_dir):
         # Load local model from filepath
+        print(f"LOADING MODEL FROM LOCAL DIR: {local_dir}")
         return AutoModelForSeq2SeqLM.from_pretrained(local_dir), AutoTokenizer.from_pretrained(local_dir)
     else:
         # Download from HuggingFace repository
-        tokenizer = AutoTokenizer.from_pretrained(hf_repo, force_download=True)
-        model = AutoModelForSeq2SeqLM.from_pretrained(
-            hf_repo, force_download=True)
+        print(f"DOWNLOADING NEW MODEL: {hf_repo}")
+        tokenizer = AutoTokenizer.from_pretrained(hf_repo, **kwargs)
+        model = AutoModelForSeq2SeqLM.from_pretrained(hf_repo)
         # Save locally
+        print(f"SAVING NEW MODEL TO: {local_dir}")
         tokenizer.save_pretrained(local_dir)
         model.save_pretrained(local_dir)
         # Return model and tokenizer

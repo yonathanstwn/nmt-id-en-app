@@ -11,6 +11,10 @@ import datasetLoaders
 class RunnerConfig(Enum):
     """Utility class to define enum constants for different models, datasets, training configurations"""
 
+    #################################
+    ###### HELSINKI OPUS MODEL ######
+    #################################
+
     # Helsinki-OPUS-en-id model finetuned with ccmatrix dataset using varying learning rates
     TRAIN_OPUS_EN_ID_CCMATRIX_LR_3 = 'TRAIN_OPUS_EN_ID_CCMATRIX_LR_3'
     TRAIN_OPUS_EN_ID_CCMATRIX_LR_4 = 'TRAIN_OPUS_EN_ID_CCMATRIX_LR_4'
@@ -20,10 +24,10 @@ class RunnerConfig(Enum):
     TRAIN_OPUS_ID_EN_CCMATRIX_WARMUP = 'TRAIN_OPUS_ID_EN_CCMATRIX_WARMUP'
     TRAIN_OPUS_ID_EN_CCMATRIX_NO_WARMUP = 'TRAIN_OPUS_ID_EN_CCMATRIX_NO_WARMUP'
 
-    # Helsinki-OPUS-en-id model finetuned with ccmatrix dataset with lr=1e-5 and 10M training examples
+    # Helsinki-OPUS-en-id model finetuned with ccmatrix dataset with lr=1e-5, epochs=5, 5M training examples
     TRAIN_OPUS_EN_ID_CCMATRIX_V2 = 'TRAIN_OPUS_EN_ID_CCMATRIX_V2'
 
-    # Helsinki-OPUS-id-en model finetuned with ccmatrix dataset with lr=1e-5 and 10M training examples
+    # Helsinki-OPUS-id-en model finetuned with ccmatrix dataset with lr=1e-5, epochs=5, 5M training examples
     TRAIN_OPUS_ID_EN_CCMATRIX_V2 = 'TRAIN_OPUS_ID_EN_CCMATRIX_V2'
 
     # Helsinki-OPUS-en-id model finetuned with OPUS100 with default hyperparameters
@@ -43,6 +47,16 @@ class RunnerConfig(Enum):
 
     # Helsinki-OPUS-id-en model finetuned with "jakartaresearch/inglish" with lr=1e-5 as it is optimal from previous training stats
     TRAIN_OPUS_ID_EN_JAKARTA = 'TRAIN_OPUS_ID_EN_JAKARTA'
+
+    #################################
+    ###### FACEBOOK NLLB MODEL ######
+    #################################
+
+    # NLLB (english to indonesian) finetuned with ccmatrix dataset with lr=1e-5, epochs=5, warmup_steps=4000
+    TRAIN_NLLB_EN_ID_CCMATRIX = 'TRAIN_NLLB_EN_ID_CCMATRIX'
+
+    # NLLB (indonesian to english) finetuned with ccmatrix dataset with lr=1e-5, epochs=5, warmup_steps=4000
+    TRAIN_NLLB_ID_EN_CCMATRIX = 'TRAIN_NLLB_ID_EN_CCMATRIX'
 
 
 def main(runner_config):
@@ -66,7 +80,8 @@ def main(runner_config):
         api.train("Helsinki-NLP/opus-mt-en-id",
                   'opus-mt-en-id-ccmatrix-lr-5', dataset, 'en-id', lr=1e-5)
     elif runner_config == RunnerConfig.TRAIN_OPUS_EN_ID_CCMATRIX_V2.value:
-        dataset = datasetLoaders.get_ccmatrix_train_val_ds(size=5_000_000, split_percentage=0.05)
+        dataset = datasetLoaders.get_ccmatrix_train_val_ds(
+            size=5_000_000, split_percentage=0.05)
         api.train("Helsinki-NLP/opus-mt-en-id",
                   'opus-mt-en-id-ccmatrix-v2', dataset, 'en-id', lr=1e-5, epochs_n=5)
 
@@ -84,7 +99,8 @@ def main(runner_config):
         api.train("Helsinki-NLP/opus-mt-id-en",
                   'opus-mt-id-en-ccmatrix-no-warmup', dataset, 'id-en', warmup_steps=0)
     elif runner_config == RunnerConfig.TRAIN_OPUS_ID_EN_CCMATRIX_V2.value:
-        dataset = datasetLoaders.get_ccmatrix_train_val_ds(size=5_000_000, split_percentage=0.05)
+        dataset = datasetLoaders.get_ccmatrix_train_val_ds(
+            size=5_000_000, split_percentage=0.05)
         api.train("Helsinki-NLP/opus-mt-id-en",
                   'opus-mt-id-en-ccmatrix-v2', dataset, 'id-en', lr=1e-5, epochs_n=5)
 
@@ -127,7 +143,7 @@ def main(runner_config):
         dataset = datasetLoaders.get_open_subtitles_train_val_ds()
         api.train("Helsinki-NLP/opus-mt-id-en",
                   'opus-mt-id-en-open-subtitles', dataset, 'id-en')
-        
+
     ###################################################
     ###### JAKARTA ENGLISH -> INDONESIAN ##############
     ###################################################
@@ -148,6 +164,27 @@ def main(runner_config):
         api.train("Helsinki-NLP/opus-mt-id-en",
                   'opus-mt-id-en-jakarta', dataset, 'id-en', lr=1e-5)
 
+    ###################################################
+    ###### NLLB CCMATRIX ENGLISH -> INDONESIAN ########
+    ###################################################
+
+    # NLLB (english to indonesian) finetuned with ccmatrix dataset with lr=1e-5, epochs=5, warmup_steps=4000
+    elif runner_config == RunnerConfig.TRAIN_NLLB_EN_ID_CCMATRIX.value:
+        dataset = datasetLoaders.get_ccmatrix_train_val_ds()
+        api.train("facebook/nllb-200-distilled-600M",
+                  'nllb-en-id-ccmatrix', dataset, 'en-id', base_model_dir="nllb-en-id",
+                  lr=1e-5, epochs_n=5, src_lang="eng_Latn", tgt_lang="ind_Latn")
+
+    ###################################################
+    ###### NLLB CCMATRIX INDONESIAN -> ENGLISH ########
+    ###################################################
+
+    # NLLB (indonesian to english) finetuned with ccmatrix dataset with lr=1e-5, epochs=5, warmup_steps=4000
+    elif runner_config == RunnerConfig.TRAIN_NLLB_ID_EN_CCMATRIX.value:
+        dataset = datasetLoaders.get_ccmatrix_train_val_ds()
+        api.train("facebook/nllb-200-distilled-600M",
+                  'nllb-id-en-ccmatrix', dataset, 'id-en', base_model_dir="nllb-id-en",
+                  lr=1e-5, epochs_n=5, src_lang="ind_Latn", tgt_lang="eng_Latn")
 
 if __name__ == '__main__':
     main(sys.argv[1])
