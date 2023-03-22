@@ -58,6 +58,12 @@ class RunnerConfig(Enum):
     # NLLB (indonesian to english) finetuned with ccmatrix dataset with lr=1e-5, epochs=5, warmup_steps=4000
     TRAIN_NLLB_ID_EN_CCMATRIX = 'TRAIN_NLLB_ID_EN_CCMATRIX'
 
+    # NLLB (english to indonesian) finetuned with opus100 dataset with lr=1e-5, epochs=5, warmup_steps=4000
+    TRAIN_NLLB_EN_ID_OPUS100 = 'TRAIN_NLLB_EN_ID_OPUS100'
+
+    # NLLB (indonesian to english) finetuned with opus100 dataset with lr=1e-5, epochs=5, warmup_steps=4000
+    TRAIN_NLLB_ID_EN_OPUS100 = 'TRAIN_NLLB_ID_EN_OPUS100'
+
 
 def main(runner_config):
     """Main runner function which simply matches training configuration to the corresponding function calls"""
@@ -185,6 +191,29 @@ def main(runner_config):
         api.train("facebook/nllb-200-distilled-600M",
                   'nllb-id-en-ccmatrix', dataset, 'id-en', base_model_dir="nllb-id-en",
                   lr=1e-5, epochs_n=5, src_lang="ind_Latn", tgt_lang="eng_Latn")
+
+    ###################################################
+    ###### NLLB OPUS100 ENGLISH -> INDONESIAN ########
+    ###################################################
+
+    # NLLB (english to indonesian) finetuned with opus100 dataset with lr=1e-5, epochs=5, warmup_steps=4000
+    elif runner_config == RunnerConfig.TRAIN_NLLB_EN_ID_OPUS100.value:
+        dataset = datasetLoaders.get_opus100_train_val_ds()
+        api.train("facebook/nllb-200-distilled-600M",
+                  'nllb-en-id-opus100', dataset, 'en-id', base_model_dir="nllb-en-id",
+                  lr=1e-5, epochs_n=10, src_lang="eng_Latn", tgt_lang="ind_Latn")
+
+    ###################################################
+    ###### NLLB OPUS100 INDONESIAN -> ENGLISH ########
+    ###################################################
+
+    # NLLB (indonesian to english) finetuned with opus100 dataset with lr=1e-5, epochs=5, warmup_steps=4000
+    elif runner_config == RunnerConfig.TRAIN_NLLB_ID_EN_OPUS100.value:
+        dataset = datasetLoaders.get_opus100_train_val_ds()
+        api.train("facebook/nllb-200-distilled-600M",
+                  'nllb-id-en-opus100', dataset, 'id-en', base_model_dir="nllb-id-en",
+                  lr=1e-5, epochs_n=10, src_lang="ind_Latn", tgt_lang="eng_Latn")
+
 
 if __name__ == '__main__':
     main(sys.argv[1])
