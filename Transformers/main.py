@@ -179,7 +179,7 @@ def main(runner_config):
         dataset = datasetLoaders.get_ccmatrix_train_val_ds()
         api.train("facebook/nllb-200-distilled-600M",
                   'nllb-en-id-ccmatrix', dataset, 'en-id', base_model_dir="nllb-en-id",
-                  lr=1e-5, epochs_n=5, src_lang="eng_Latn", tgt_lang="ind_Latn")
+                  lr=1e-5, epochs_n=10, src_lang="eng_Latn", tgt_lang="ind_Latn")
 
     ###################################################
     ###### NLLB CCMATRIX INDONESIAN -> ENGLISH ########
@@ -190,7 +190,7 @@ def main(runner_config):
         dataset = datasetLoaders.get_ccmatrix_train_val_ds()
         api.train("facebook/nllb-200-distilled-600M",
                   'nllb-id-en-ccmatrix', dataset, 'id-en', base_model_dir="nllb-id-en",
-                  lr=1e-5, epochs_n=5, src_lang="ind_Latn", tgt_lang="eng_Latn")
+                  lr=1e-5, epochs_n=10, src_lang="ind_Latn", tgt_lang="eng_Latn")
 
     ###################################################
     ###### NLLB OPUS100 ENGLISH -> INDONESIAN ########
