@@ -2,12 +2,14 @@
 Main runner file to scrape or generate English - Colloquial Indonesian dataset
 from OpenAI GPT-3.5 API endpoints.
 """
+from http.client import RemoteDisconnected
 import openai
 import json
 from datasets import load_dataset
 import sqlalchemy as db
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, Session
 from sqlalchemy import select
+import signal
 
 
 class Base(DeclarativeBase):
@@ -47,6 +49,28 @@ def print_database():
         print(row)
 
 
+def timeout(seconds):
+    def process_timeout(func):
+        def handle_timeout(signum, frame):
+            raise TimeoutError("The function timed out")
+        def wrapper(*args, **kwargs):
+            signal.signal(signal.SIGALRM, handle_timeout)
+            signal.alarm(seconds)
+            try:
+                func(*args, **kwargs)
+            finally:
+                signal.alarm(0)
+        return wrapper
+    return process_timeout
+
+
+@timeout(seconds=2)
+def infinite():
+    print("Running infinite...")
+    while True:
+        pass
+
+
 def init_database():
     """
     Create local sqlite database to store the GPT generated translations.
@@ -74,18 +98,21 @@ def load_open_subtitles_dataset(start, end):
 
 
 def send_gpt_prompt(english_sentence):
-    """Send API request to OpenAI GPT-3.5-turbo model to translate English sentence to Colloquial Indonesian"""
-    return openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": "English to informal colloquial Indonesian translator. No extra output information."},
-            {"role": "user", "content": f"Translate: {english_sentence}"}
-        ]
-    )
-
-def send_gpt_prompt_safe(english_sentence):
-    """Implements a safety try-except block to handle bad connection issues""" 
-
+    """
+    Send API request to OpenAI GPT-3.5-turbo model to translate English sentence to Colloquial Indonesian.
+    Implements a safety try-except block to handle bad connection issues which simply returns None if not successful.
+    """
+    try:
+        return openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "English to informal colloquial Indonesian translator. No extra output information."},
+                {"role": "user", "content": f"Translate: {english_sentence}"}
+            ]
+        )
+    except Exception as e:
+        print(f"FAILED with exception: {e}\nTrying again...")
+        return None
 
 def insert_to_database(session, english_sentence, formal_indo_sentence, colloquial_indo_sentence):
     """Add translation record/row based on parameters to the database"""
@@ -112,7 +139,11 @@ def main():
         english_sentence = example['en']
         formal_indo_sentence = example['id']
         if len(english_sentence) <= CHAR_LIMIT:
-            response = send_gpt_prompt(english_sentence)
+            response = None
+            # Keep trying to send request until successful
+            while response is None:
+                print("\nTrying to send request...")
+                response = send_gpt_prompt(english_sentence)
             colloquial_indo_sentence = response['choices'][0]['message']['content']
             insert_to_database(session, english_sentence,
                                formal_indo_sentence, colloquial_indo_sentence)
