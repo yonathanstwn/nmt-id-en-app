@@ -49,26 +49,28 @@ def print_database():
         print(row)
 
 
-def timeout(seconds):
-    def process_timeout(func):
-        def handle_timeout(signum, frame):
-            raise TimeoutError("The function timed out")
-        def wrapper(*args, **kwargs):
-            signal.signal(signal.SIGALRM, handle_timeout)
-            signal.alarm(seconds)
+def timeout(n_seconds):
+    """Higher level function or decorator. Gives corresponding function call a timeout."""
+    
+    def process(f):
+        """Inner function to process the actual timeout functionality"""
+
+        def handle(signum, frame):
+            """Executes when timeout is triggered, i.e. when function executes for more than {n_seconds} seconds"""
+            raise TimeoutError(f"TIMEOUT: function has been executing more than {n_seconds} sec.")
+        
+        def f_wrapper(*args, **kwargs):
+            """Wrapper for the actual function f to be given a timeout"""
+            signal.signal(signal.SIGALRM, handle)
+            signal.alarm(n_seconds)
             try:
-                func(*args, **kwargs)
+                return f(*args, **kwargs)
             finally:
                 signal.alarm(0)
-        return wrapper
-    return process_timeout
-
-
-@timeout(seconds=2)
-def infinite():
-    print("Running infinite...")
-    while True:
-        pass
+        
+        return f_wrapper
+    
+    return process
 
 
 def init_database():
@@ -97,19 +99,22 @@ def load_open_subtitles_dataset(start, end):
         'train'].select(range(start, end))['translation']
 
 
+@timeout(n_seconds=3)
 def send_gpt_prompt(english_sentence):
     """
     Send API request to OpenAI GPT-3.5-turbo model to translate English sentence to Colloquial Indonesian.
     Implements a safety try-except block to handle bad connection issues which simply returns None if not successful.
     """
     try:
-        return openai.ChatCompletion.create(
+        x = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "English to informal colloquial Indonesian translator. No extra output information."},
                 {"role": "user", "content": f"Translate: {english_sentence}"}
             ]
         )
+        print(x)
+        return x
     except Exception as e:
         print(f"FAILED with exception: {e}\nTrying again...")
         return None
@@ -129,7 +134,7 @@ def main():
 
     session = init_database()
     setup_openai_key()
-    dataset = load_open_subtitles_dataset(0, 15)
+    dataset = load_open_subtitles_dataset(0, 25_000)
     dataset_size = len(dataset)
 
     success_count = 0
@@ -143,7 +148,11 @@ def main():
             # Keep trying to send request until successful
             while response is None:
                 print("\nTrying to send request...")
-                response = send_gpt_prompt(english_sentence)
+                try:
+                    response = send_gpt_prompt(english_sentence)
+                except TimeoutError as e:
+                    print(f"{e}\nTrying again...")
+                    response = None
             colloquial_indo_sentence = response['choices'][0]['message']['content']
             insert_to_database(session, english_sentence,
                                formal_indo_sentence, colloquial_indo_sentence)
