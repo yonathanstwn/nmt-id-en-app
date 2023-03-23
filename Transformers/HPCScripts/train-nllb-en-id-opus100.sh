@@ -2,7 +2,7 @@
 #SBATCH --output=/scratch/users/%u/JobOut/%j-train-nllb-en-id-opus100.out
 #SBATCH --job-name=fypTrain
 #SBATCH --time=0-48:00
-#SBATCH --mem=10000
+#SBATCH --mem=15000
 #SBATCH --gres=gpu
 export TRANSFORMERS_CACHE=/scratch/users/k2036348/.cache
 export HF_HOME=/scratch/users/k2036348/.cache
