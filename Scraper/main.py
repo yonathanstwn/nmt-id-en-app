@@ -134,7 +134,7 @@ def main():
 
     session = init_database()
     setup_openai_key()
-    dataset = load_open_subtitles_dataset(0, 25_000)
+    dataset = load_open_subtitles_dataset(0, 1)
     dataset_size = len(dataset)
 
     success_count = 0
