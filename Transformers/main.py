@@ -65,6 +65,7 @@ class RunnerConfig(Enum):
     # Tests all successful and best NLLB model checkpoints based on val_bleu and val_loss
     TEST_ALL_NLLB = 'TEST_ALL_NLLB'
 
+
 def append_to_test_results_file(results):
     """Append to results part of the test_results.json file"""
     with open("test_results.json", 'r') as f:
@@ -74,7 +75,19 @@ def append_to_test_results_file(results):
     with open("test_results.json", 'w') as f:
         json.dump(data, f, indent=4)
 
-def test_all_datasets(hf_model_repo, lang_pair):
+
+def test_all_datasets(hf_model_repo, lang_pair, **kwargs):
+    """
+    Test a model with all the test datasets available.
+
+    Test datasets:
+    - opus100_testset
+    - tatoeba_testset
+    - flores101_dev_testset
+    - flores101_devtest_testset
+    - flores200_dev_testset
+    - flores200_devtest_testset
+    """
 
     dataset_names_to_datasets = {
         'opus100_testset': datasetLoaders.get_opus100_test_ds(),
@@ -86,10 +99,16 @@ def test_all_datasets(hf_model_repo, lang_pair):
     }
 
     for ds_name, ds in dataset_names_to_datasets.items():
-        results = api.test(hf_model_repo, ds['test'], lang_pair)
-        print(hf_model_repo)
-        print(results)
-        print()
+        results = api.test(hf_model_repo, ds['test'], lang_pair, **kwargs)
+        model_results = {
+            "model": hf_model_repo,
+            "test_dataset": ds_name,
+            "language_pair": lang_pair,
+            "test_loss": results["test_loss"],
+            "test_bleu": results["test_bleu"],
+            "test_runtime": results["test_runtime"]
+        }
+        append_to_test_results_file(model_results)
 
 
 def main(runner_config):
@@ -218,6 +237,48 @@ def main(runner_config):
         api.train("facebook/nllb-200-distilled-600M",
                   'nllb-id-en-ccmatrix', dataset, 'id-en', base_model_dir="nllb-id-en",
                   lr=1e-5, epochs_n=10, src_lang="ind_Latn", tgt_lang="eng_Latn")
+
+    ###################################################
+    ###### TESTING ALL HELSINKI-OPUS MODELS ###########
+    ###################################################
+
+    # Tests all successful and best Helsinki-OPUS model checkpoints based on val_bleu and val_loss
+    elif runner_config == RunnerConfig.TEST_ALL_OPUS.value:
+        
+        # All models for English -> Indonesian translations
+        hf_model_repo_list = [
+            "Helsinki-NLP/opus-mt-en-id"]
+        lang_pair = 'en-id'
+        for hf_model_repo in hf_model_repo_list:
+            test_all_datasets(hf_model_repo, lang_pair)
+        
+        # All models for Indonesian -> English translations
+        hf_model_repo_list = [
+            "Helsinki-NLP/opus-mt-id-en"]
+        lang_pair = 'id-en'
+        for hf_model_repo in hf_model_repo_list:
+            test_all_datasets(hf_model_repo, lang_pair)
+
+    ###################################################
+    ########### TESTING ALL NLLB MODELS ###############
+    ###################################################
+
+    # Tests all successful and best NLLB model checkpoints based on val_bleu and val_loss
+    elif runner_config == RunnerConfig.TEST_ALL_NLLB.value:
+        
+        # All models for English -> Indonesian translations
+        hf_model_repo_list = [
+            "facebook/nllb-200-distilled-600M"]
+        lang_pair = 'en-id'
+        for hf_model_repo in hf_model_repo_list:
+            test_all_datasets(hf_model_repo, lang_pair, src_lang="eng_Latn", tgt_lang="ind_Latn")
+        
+        # All models for Indonesian -> English translations
+        hf_model_repo_list = [
+            "facebook/nllb-200-distilled-600M"]
+        lang_pair = 'id-en'
+        for hf_model_repo in hf_model_repo_list:
+            test_all_datasets(hf_model_repo, lang_pair, src_lang="ind_Latn", tgt_lang="eng_Latn")
 
 
 if __name__ == '__main__':

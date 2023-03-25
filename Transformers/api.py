@@ -34,11 +34,14 @@ def train(hf_model_repo,
     trainer.push_to_hub()
 
 
-def test(hf_model_repo, dataset, lang_pair):
-    """Tests the model using the test dataset provided to calculate loss and bleu metrics"""
+def test(hf_model_repo, dataset, lang_pair, **kwargs):
+    """
+    Tests the model using the test dataset provided to calculate loss and bleu metrics.
+    Returns dictionary with keys: test_loss, test_bleu, test_runtime, etc.
+    """
 
     # Basic setup
-    model, tokenizer = utils.load_model_and_tokenizer(hf_model_repo)
+    model, tokenizer = utils.load_model_and_tokenizer(hf_model_repo, save=False, **kwargs)
     tokenized_test_dataset = utils.tokenize_dataset(
         dataset, tokenizer, lang_pair)
     compute_metrics_function = utils.create_compute_metrics_function(tokenizer)

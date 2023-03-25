@@ -13,7 +13,7 @@ import json
 import os
 
 
-def load_model_and_tokenizer(hf_repo, base_model_dir=None, **kwargs):
+def load_model_and_tokenizer(hf_repo, base_model_dir=None, save_model=True, **kwargs):
     """
     Download model and tokenizer if not downloaded yet, otherwise load them from local directory.
     The base model save directory can be optionally set as well.
@@ -33,10 +33,11 @@ def load_model_and_tokenizer(hf_repo, base_model_dir=None, **kwargs):
         print(f"DOWNLOADING NEW MODEL: {hf_repo}")
         tokenizer = AutoTokenizer.from_pretrained(hf_repo, **kwargs)
         model = AutoModelForSeq2SeqLM.from_pretrained(hf_repo)
-        # Save locally
-        print(f"SAVING NEW MODEL TO: {local_dir}")
-        tokenizer.save_pretrained(local_dir)
-        model.save_pretrained(local_dir)
+        if save_model:
+            # Save locally
+            print(f"SAVING NEW MODEL TO: {local_dir}")
+            tokenizer.save_pretrained(local_dir)
+            model.save_pretrained(local_dir)
         # Return model and tokenizer
         return model, tokenizer
 
