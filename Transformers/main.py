@@ -6,6 +6,7 @@ import sys
 from enum import Enum
 import api
 import datasetLoaders
+import json
 
 
 class RunnerConfig(Enum):
@@ -48,6 +49,9 @@ class RunnerConfig(Enum):
     # Helsinki-OPUS-id-en model finetuned with "jakartaresearch/inglish" with lr=1e-5 as it is optimal from previous training stats
     TRAIN_OPUS_ID_EN_JAKARTA = 'TRAIN_OPUS_ID_EN_JAKARTA'
 
+    # Tests all successful and best Helsinki-OPUS model checkpoints based on val_bleu and val_loss
+    TEST_ALL_OPUS = 'TEST_ALL_OPUS'
+
     #################################
     ###### FACEBOOK NLLB MODEL ######
     #################################
@@ -58,11 +62,34 @@ class RunnerConfig(Enum):
     # NLLB (indonesian to english) finetuned with ccmatrix dataset with lr=1e-5, epochs=5, warmup_steps=4000
     TRAIN_NLLB_ID_EN_CCMATRIX = 'TRAIN_NLLB_ID_EN_CCMATRIX'
 
-    # NLLB (english to indonesian) finetuned with opus100 dataset with lr=1e-5, epochs=5, warmup_steps=4000
-    TRAIN_NLLB_EN_ID_OPUS100 = 'TRAIN_NLLB_EN_ID_OPUS100'
+    # Tests all successful and best NLLB model checkpoints based on val_bleu and val_loss
+    TEST_ALL_NLLB = 'TEST_ALL_NLLB'
 
-    # NLLB (indonesian to english) finetuned with opus100 dataset with lr=1e-5, epochs=5, warmup_steps=4000
-    TRAIN_NLLB_ID_EN_OPUS100 = 'TRAIN_NLLB_ID_EN_OPUS100'
+def append_to_test_results_file(results):
+    """Append to results part of the test_results.json file"""
+    with open("test_results.json", 'r') as f:
+        data = json.load(f)
+    data['results'].append(results)
+    data['number_of_tests'] += 1
+    with open("test_results.json", 'w') as f:
+        json.dump(data, f, indent=4)
+
+def test_all_datasets(hf_model_repo, lang_pair):
+
+    dataset_names_to_datasets = {
+        'opus100_testset': datasetLoaders.get_opus100_test_ds(),
+        'tatoeba_testset': datasetLoaders.get_tatoeba_test_ds(),
+        'flores101_dev_testset': datasetLoaders.get_flores_test_ds('dev', '101'),
+        'flores101_devtest_testset': datasetLoaders.get_flores_test_ds('devtest', '101'),
+        'flores200_dev_testset': datasetLoaders.get_flores_test_ds('dev', '200'),
+        'flores200_devtest_testset': datasetLoaders.get_flores_test_ds('devtest', '200')
+    }
+
+    for ds_name, ds in dataset_names_to_datasets.items():
+        results = api.test(hf_model_repo, ds['test'], lang_pair)
+        print(hf_model_repo)
+        print(results)
+        print()
 
 
 def main(runner_config):
@@ -190,28 +217,6 @@ def main(runner_config):
         dataset = datasetLoaders.get_ccmatrix_train_val_ds()
         api.train("facebook/nllb-200-distilled-600M",
                   'nllb-id-en-ccmatrix', dataset, 'id-en', base_model_dir="nllb-id-en",
-                  lr=1e-5, epochs_n=10, src_lang="ind_Latn", tgt_lang="eng_Latn")
-
-    ###################################################
-    ###### NLLB OPUS100 ENGLISH -> INDONESIAN ########
-    ###################################################
-
-    # NLLB (english to indonesian) finetuned with opus100 dataset with lr=1e-5, epochs=5, warmup_steps=4000
-    elif runner_config == RunnerConfig.TRAIN_NLLB_EN_ID_OPUS100.value:
-        dataset = datasetLoaders.get_opus100_train_val_ds()
-        api.train("facebook/nllb-200-distilled-600M",
-                  'nllb-en-id-opus100', dataset, 'en-id', base_model_dir="nllb-en-id",
-                  lr=1e-5, epochs_n=10, src_lang="eng_Latn", tgt_lang="ind_Latn")
-
-    ###################################################
-    ###### NLLB OPUS100 INDONESIAN -> ENGLISH ########
-    ###################################################
-
-    # NLLB (indonesian to english) finetuned with opus100 dataset with lr=1e-5, epochs=5, warmup_steps=4000
-    elif runner_config == RunnerConfig.TRAIN_NLLB_ID_EN_OPUS100.value:
-        dataset = datasetLoaders.get_opus100_train_val_ds()
-        api.train("facebook/nllb-200-distilled-600M",
-                  'nllb-id-en-opus100', dataset, 'id-en', base_model_dir="nllb-id-en",
                   lr=1e-5, epochs_n=10, src_lang="ind_Latn", tgt_lang="eng_Latn")
 
 
