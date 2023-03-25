@@ -43,7 +43,7 @@ def test(hf_model_repo, dataset, lang_pair):
         dataset, tokenizer, lang_pair)
     compute_metrics_function = utils.create_compute_metrics_function(tokenizer)
 
-    tokenized_test_dataset = tokenized_test_dataset._columns(['translation'])
+    tokenized_test_dataset = tokenized_test_dataset.remove_columns(['translation'])
 
     # Empty training args as this is for testing only
     training_args = Seq2SeqTrainingArguments('temp-test-trainer', per_device_eval_batch_size=32)
