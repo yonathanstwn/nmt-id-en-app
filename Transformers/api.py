@@ -45,15 +45,15 @@ def test(hf_model_repo, dataset, lang_pair):
 
     # Empty training args as this is for testing only
     training_args = Seq2SeqTrainingArguments('temp-test-trainer', 
-                                             per_device_eval_batch_size=2)
+                                             per_device_eval_batch_size=32)
 
-    # Empty train and validation datasets
-    train_val_dataset = {'train': [], 'validation': []}
+    # Empty train dataset and place test dataset as validation so later can test with trainer.evaluate()
+    train_val_dataset = {'train': [], 'validation': tokenized_test_dataset}
     trainer = utils.init_trainer(
         model, training_args, train_val_dataset, tokenizer, compute_metrics_function)
 
     # Test
-    test_results = trainer.predict(tokenized_test_dataset)
+    test_results = trainer.evaluate()
 
     return test_results
 
