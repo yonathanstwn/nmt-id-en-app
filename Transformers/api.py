@@ -45,7 +45,7 @@ def test(hf_model_repo, dataset, lang_pair):
 
     # Empty training args as this is for testing only
     training_args = Seq2SeqTrainingArguments('temp-test-trainer', 
-                                             auto_find_batch_size=True)
+                                             per_device_eval_batch_size=2)
 
     # Empty train and validation datasets
     train_val_dataset = {'train': [], 'validation': []}
