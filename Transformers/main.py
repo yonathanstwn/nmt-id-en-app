@@ -6,6 +6,7 @@ import sys
 from enum import Enum
 import api
 import datasetLoaders
+import json
 
 
 class RunnerConfig(Enum):
@@ -48,6 +49,9 @@ class RunnerConfig(Enum):
     # Helsinki-OPUS-id-en model finetuned with "jakartaresearch/inglish" with lr=1e-5 as it is optimal from previous training stats
     TRAIN_OPUS_ID_EN_JAKARTA = 'TRAIN_OPUS_ID_EN_JAKARTA'
 
+    # Tests all successful and best Helsinki-OPUS model checkpoints based on val_bleu and val_loss
+    TEST_ALL_OPUS = 'TEST_ALL_OPUS'
+
     #################################
     ###### FACEBOOK NLLB MODEL ######
     #################################
@@ -57,6 +61,35 @@ class RunnerConfig(Enum):
 
     # NLLB (indonesian to english) finetuned with ccmatrix dataset with lr=1e-5, epochs=5, warmup_steps=4000
     TRAIN_NLLB_ID_EN_CCMATRIX = 'TRAIN_NLLB_ID_EN_CCMATRIX'
+
+    # Tests all successful and best NLLB model checkpoints based on val_bleu and val_loss
+    TEST_ALL_NLLB = 'TEST_ALL_NLLB'
+
+def append_to_test_results_file(results):
+    """Append to results part of the test_results.json file"""
+    with open("test_results.json", 'r') as f:
+        data = json.load(f)
+    data['results'].append(results)
+    data['number_of_tests'] += 1
+    with open("test_results.json", 'w') as f:
+        json.dump(data, f, indent=4)
+
+def test_all_datasets(hf_model_repo, lang_pair):
+
+    dataset_names_to_datasets = {
+        'opus100_testset': datasetLoaders.get_opus100_test_ds(),
+        'tatoeba_testset': datasetLoaders.get_tatoeba_test_ds(),
+        'flores101_dev_testset': datasetLoaders.get_flores_test_ds('dev', '101'),
+        'flores101_devtest_testset': datasetLoaders.get_flores_test_ds('devtest', '101'),
+        'flores200_dev_testset': datasetLoaders.get_flores_test_ds('dev', '200'),
+        'flores200_devtest_testset': datasetLoaders.get_flores_test_ds('devtest', '200')
+    }
+
+    for ds_name, ds in dataset_names_to_datasets.items():
+        results = api.test(hf_model_repo, ds['test'], lang_pair)
+        print(hf_model_repo)
+        print(results)
+        print()
 
 
 def main(runner_config):
