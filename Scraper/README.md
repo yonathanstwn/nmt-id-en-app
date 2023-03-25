@@ -19,7 +19,7 @@ This will queue and run a batch job when the required resources are available in
 
 Please ensure you have installed all the requirements from the root folder which includes the `openai` python library.
 
-Create a json file in the `Scraper` folder called `api_key.json` with the following schema:
+Create a json file in the `Scraper` folder called `api_key.json` with the following schema to place your secret OpenAI key:
 
 ```json
 {
