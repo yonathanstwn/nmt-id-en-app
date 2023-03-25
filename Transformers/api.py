@@ -44,7 +44,7 @@ def test(hf_model_repo, dataset, lang_pair):
     compute_metrics_function = utils.create_compute_metrics_function(tokenizer)
 
     # Empty training args as this is for testing only
-    training_args = Seq2SeqTrainingArguments('temp-test-trainer')
+    training_args = Seq2SeqTrainingArguments('temp-test-trainer', per_device_eval_batch_size=4)
 
     # Empty train and validation datasets
     train_val_dataset = {'train': [], 'validation': []}
