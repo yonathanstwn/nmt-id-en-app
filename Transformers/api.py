@@ -41,7 +41,7 @@ def test(hf_model_repo, dataset, lang_pair, **kwargs):
     """
 
     # Basic setup
-    model, tokenizer = utils.load_model_and_tokenizer(hf_model_repo, save=False, **kwargs)
+    model, tokenizer = utils.load_model_and_tokenizer(hf_model_repo, save_model=False, **kwargs)
     tokenized_test_dataset = utils.tokenize_dataset(
         dataset, tokenizer, lang_pair)
     compute_metrics_function = utils.create_compute_metrics_function(tokenizer)
