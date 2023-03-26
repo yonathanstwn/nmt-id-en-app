@@ -59,7 +59,8 @@ def test(hf_model_repo, dataset, lang_pair, **kwargs):
     # Test
     test_results = trainer.predict(tokenized_test_dataset)
 
-    return test_results
+    # Return metrics of test results
+    return test_results.metrics
 
 
 def translate(model, tokenizer, input_text, **kwargs):
