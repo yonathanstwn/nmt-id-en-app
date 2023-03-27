@@ -2,6 +2,7 @@
 Main runner file for training and testing all the different models and datasets.
 """
 
+import os
 import sys
 from enum import Enum
 import api
@@ -67,7 +68,21 @@ class RunnerConfig(Enum):
 
 
 def append_to_test_results_file(results):
-    """Append to results part of the test_results.json file"""
+    """
+    Append to results part of the test_results.json file.
+    If file is not created yet, create new test_results.json file.
+    """
+
+    # If file is not created yet, create file
+    if not os.path.isfile("test_results.json"):
+        with open("test_results.json", 'w') as f:
+            init_json_structure = {
+                "results": [],
+                "number_of_tests": 0
+            }
+            json.dump(init_json_structure, f, indent=4)
+
+    # Main algorithm to append test results to the json file
     with open("test_results.json", 'r') as f:
         data = json.load(f)
     data['results'].append(results)
@@ -89,6 +104,7 @@ def test_all_datasets(hf_model_repo, lang_pair, **kwargs):
     - flores200_devtest_testset
     """
 
+    # Dictionary to link dataset names to actual dataset objects
     dataset_names_to_datasets = {
         'opus100_testset': datasetLoaders.get_opus100_test_ds(),
         'tatoeba_testset': datasetLoaders.get_tatoeba_test_ds(),
@@ -98,6 +114,7 @@ def test_all_datasets(hf_model_repo, lang_pair, **kwargs):
         'flores200_devtest_testset': datasetLoaders.get_flores_test_ds('devtest', '200')
     }
 
+    # Test the model on every dataset and record individual results to the test_results.json file. 
     for ds_name, ds in dataset_names_to_datasets.items():
         results = api.test(hf_model_repo, ds['test'], lang_pair, **kwargs)
         model_results = {

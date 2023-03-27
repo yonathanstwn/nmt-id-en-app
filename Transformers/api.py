@@ -2,9 +2,9 @@
 Main public API functions to be called by outside scripts
 """
 
+import shutil
 import utils
 from transformers import Seq2SeqTrainingArguments
-import json
 
 
 def train(hf_model_repo,
@@ -58,6 +58,9 @@ def test(hf_model_repo, dataset, lang_pair, **kwargs):
 
     # Test
     test_results = trainer.predict(tokenized_test_dataset)
+
+    # Delete empty temp-test-trainer folder which was side effect of initializing trainer
+    shutil.rmtree('temp-test-trainer')
 
     # Return metrics of test results
     return test_results.metrics
