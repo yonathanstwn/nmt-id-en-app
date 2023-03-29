@@ -1,0 +1,101 @@
+{
+    "results": [
+        {
+            "model": "Helsinki-NLP/opus-mt-en-id",
+            "test_dataset": "opus100_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.3157280683517456,
+            "test_bleu": 36.7868,
+            "test_runtime": 38.7056
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-en-id",
+            "test_dataset": "tatoeba_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.0395649671554565,
+            "test_bleu": 39.1834,
+            "test_runtime": 55.6876
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-en-id",
+            "test_dataset": "flores101_dev_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.5131937265396118,
+            "test_bleu": 37.2157,
+            "test_runtime": 24.5022
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-en-id",
+            "test_dataset": "flores101_devtest_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.4796953201293945,
+            "test_bleu": 38.534,
+            "test_runtime": 25.8527
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-en-id",
+            "test_dataset": "flores200_dev_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.5131937265396118,
+            "test_bleu": 37.2157,
+            "test_runtime": 24.461
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-en-id",
+            "test_dataset": "flores200_devtest_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.4796953201293945,
+            "test_bleu": 38.534,
+            "test_runtime": 25.4895
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-id-en",
+            "test_dataset": "opus100_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.3017927408218384,
+            "test_bleu": 41.5825,
+            "test_runtime": 40.8027
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-id-en",
+            "test_dataset": "tatoeba_testset",
+            "language_pair": "id-en",
+            "test_loss": 0.8399922251701355,
+            "test_bleu": 47.2217,
+            "test_runtime": 81.8085
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-id-en",
+            "test_dataset": "flores101_dev_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.50954008102417,
+            "test_bleu": 35.1247,
+            "test_runtime": 35.2379
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-id-en",
+            "test_dataset": "flores101_devtest_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.5402214527130127,
+            "test_bleu": 33.441,
+            "test_runtime": 30.7877
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-id-en",
+            "test_dataset": "flores200_dev_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.50954008102417,
+            "test_bleu": 35.1247,
+            "test_runtime": 35.8566
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-id-en",
+            "test_dataset": "flores200_devtest_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.5402214527130127,
+            "test_bleu": 33.441,
+            "test_runtime": 30.6047
+        }
+    ],
+    "number_of_tests": 12
+}
