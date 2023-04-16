@@ -66,6 +66,16 @@ class RunnerConfig(Enum):
     # Tests all successful and best NLLB model checkpoints based on val_bleu and val_loss
     TEST_ALL_NLLB = 'TEST_ALL_NLLB'
 
+    #################################
+    ########## ECOLINDO  ############
+    #################################
+
+    # Finetune Helsinki-OPUS-en-id model with GPT-generated ecolindo dataset
+    TRAIN_OPUS_ECOLINDO = 'TRAIN_OPUS_ECOLINDO'
+
+    # Finetune NLLB (english to indonesian) model with GPT-generated ecolindo dataset
+    TRAIN_NLLB_ECOLINDO = 'TRAIN_NLLB_ECOLINDO'
+
 
 def append_to_test_results_file(results):
     """
@@ -254,6 +264,27 @@ def main(runner_config):
         api.train("facebook/nllb-200-distilled-600M",
                   'nllb-id-en-ccmatrix', dataset, 'id-en', base_model_dir="nllb-id-en",
                   lr=1e-5, epochs_n=10, src_lang="ind_Latn", tgt_lang="eng_Latn")
+        
+    ###################################################
+    ############ OPUS ECOLINDO TRAIN ##################
+    ###################################################
+
+    # Finetune Helsinki-OPUS-en-id model with GPT-generated ecolindo dataset
+    elif runner_config == RunnerConfig.TRAIN_OPUS_ECOLINDO.value:
+        dataset = datasetLoaders.get_ecolindo_train_val_ds()
+        api.train("Helsinki-NLP/opus-mt-en-id",
+                  'opus-ecolindo', dataset, 'en-id', lr=1e-5)
+
+    ###################################################
+    ############ NLLB ECOLINDO TRAIN ##################
+    ###################################################
+
+    # Finetune NLLB (english to indonesian) model with GPT-generated ecolindo dataset
+    elif runner_config == RunnerConfig.TRAIN_NLLB_ECOLINDO.value:
+        dataset = datasetLoaders.get_ecolindo_train_val_ds()
+        api.train("facebook/nllb-200-distilled-600M",
+                  'nllb-ecolindo', dataset, 'en-id', base_model_dir="nllb-en-id",
+                  lr=1e-5, epochs_n=10, src_lang="eng_Latn", tgt_lang="ind_Latn")
 
     ###################################################
     ###### TESTING ALL HELSINKI-OPUS MODELS ###########

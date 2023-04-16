@@ -23,6 +23,17 @@ from datasets import load_dataset, DatasetDict, Dataset
 ####### Train and Validation Datasets #######
 #############################################
 
+def get_ecolindo_train_val_ds():
+    """
+    Load the scraped "ecolindo" (English to Colloquial Indonesian) dataset for training and validation datasets.
+    Dataset already contains train, validation, test parts.
+    To be more memory efficient, test part is removed.
+    """
+    dataset = load_dataset("yonathanstwn/ecolindo")
+    dataset.pop('test')
+    return dataset
+
+
 def get_ccmatrix_train_val_ds(size=1_000_000, split_percentage=0.1):
     """
     Load "yhavinga/ccmatrix" dataset for training and validation datasets
@@ -79,6 +90,18 @@ def get_jakarta_research_inglish_train_val_ds():
 #############################################
 ################ Test Datasets ##############
 #############################################
+
+def get_ecolindo_test_ds():
+    """
+    Load the scraped "ecolindo" (English to Colloquial Indonesian) dataset for test dataset.
+    Dataset already contains train, validation, test parts.
+    To be more memory efficient, train and validation parts are removed.
+    """
+    dataset = load_dataset("yonathanstwn/ecolindo")
+    dataset.pop('train')
+    dataset.pop('validation')
+    return dataset
+
 
 def get_opus100_test_ds():
     """
