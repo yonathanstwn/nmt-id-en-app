@@ -2,7 +2,6 @@
 Main runner file to scrape or generate English - Colloquial Indonesian dataset
 from OpenAI GPT-3.5 API endpoints.
 """
-from http.client import RemoteDisconnected
 import openai
 import json
 from datasets import load_dataset
@@ -134,7 +133,7 @@ def main():
 
     session = init_database()
     setup_openai_key()
-    dataset = load_open_subtitles_dataset(600_000, 700_000)
+    dataset = load_open_subtitles_dataset(0, 1_000_000)
     dataset_size = len(dataset)
 
     success_count = 0
