@@ -283,7 +283,7 @@ def main(runner_config):
     elif runner_config == RunnerConfig.TRAIN_NLLB_ECOLINDO.value:
         dataset = datasetLoaders.get_ecolindo_train_val_ds()
         api.train("facebook/nllb-200-distilled-600M",
-                  'nllb-ecolindo', dataset, 'english-colloquial_ind', base_model_dir="nllb-en-id",
+                  'nllb-ecolindo', dataset, 'english-colloquial_indo', base_model_dir="nllb-en-id",
                   lr=1e-5, epochs_n=10, src_lang="eng_Latn", tgt_lang="ind_Latn")
 
     ###################################################
