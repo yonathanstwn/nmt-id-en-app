@@ -273,7 +273,7 @@ def main(runner_config):
     elif runner_config == RunnerConfig.TRAIN_OPUS_ECOLINDO.value:
         dataset = datasetLoaders.get_ecolindo_train_val_ds()
         api.train("Helsinki-NLP/opus-mt-en-id",
-                  'opus-ecolindo', dataset, 'en-id', lr=1e-5)
+                  'opus-ecolindo', dataset, 'english-colloquial_indo', lr=1e-5)
 
     ###################################################
     ############ NLLB ECOLINDO TRAIN ##################
