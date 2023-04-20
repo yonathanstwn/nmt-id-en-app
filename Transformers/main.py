@@ -295,14 +295,29 @@ def main(runner_config):
         
         # All models for English -> Indonesian translations
         hf_model_repo_list = [
-            "Helsinki-NLP/opus-mt-en-id"]
+            "Helsinki-NLP/opus-mt-en-id",
+            "yonathanstwn/opus-mt-en-id-ccmatrix-lr-5-best-loss",
+            "yonathanstwn/opus-mt-en-id-ccmatrix-lr-5-best-bleu",
+            "yonathanstwn/opus-mt-en-id-ccmatrix-lr-4-best-loss",
+            "yonathanstwn/opus-mt-en-id-ccmatrix-lr-4-best-bleu",
+            "yonathanstwn/opus-mt-en-id-ccmatrix-lr-3",
+            "yonathanstwn/opus-mt-en-id-ccmatrix-v2-best-loss-bleu",
+            "yonathanstwn/opus-mt-en-id-jakarta-best-loss-bleu",
+            ]
         lang_pair = 'en-id'
         for hf_model_repo in hf_model_repo_list:
             test_all_datasets(hf_model_repo, lang_pair)
         
         # All models for Indonesian -> English translations
         hf_model_repo_list = [
-            "Helsinki-NLP/opus-mt-id-en"]
+            "Helsinki-NLP/opus-mt-id-en",
+            "yonathanstwn/opus-mt-id-en-ccmatrix-v2-best-loss-bleu",
+            "yonathanstwn/opus-mt-id-en-jakarta-best-loss-bleu",
+            "yonathanstwn/opus-mt-id-en-ccmatrix-warmup-best-loss",
+            "yonathanstwn/opus-mt-id-en-ccmatrix-warmup-best-bleu",
+            "yonathanstwn/opus-mt-id-en-ccmatrix-no-warmup-best-loss",
+            "yonathanstwn/opus-mt-id-en-ccmatrix-no-warmup-best-bleu",
+            ]
         lang_pair = 'id-en'
         for hf_model_repo in hf_model_repo_list:
             test_all_datasets(hf_model_repo, lang_pair)
@@ -316,14 +331,20 @@ def main(runner_config):
         
         # All models for English -> Indonesian translations
         hf_model_repo_list = [
-            "facebook/nllb-200-distilled-600M"]
+            "facebook/nllb-200-distilled-600M",
+            "yonathanstwn/nllb-en-id-ccmatrix-best-loss",
+            "yonathanstwn/nllb-en-id-ccmatrix-best-bleu",
+            ]
         lang_pair = 'en-id'
         for hf_model_repo in hf_model_repo_list:
             test_all_datasets(hf_model_repo, lang_pair, src_lang="eng_Latn", tgt_lang="ind_Latn")
         
         # All models for Indonesian -> English translations
         hf_model_repo_list = [
-            "facebook/nllb-200-distilled-600M"]
+            "facebook/nllb-200-distilled-600M",
+            "yonathanstwn/nllb-id-en-ccmatrix-best-loss",
+            "yonathanstwn/nllb-id-en-ccmatrix-best-bleu",
+            ]
         lang_pair = 'id-en'
         for hf_model_repo in hf_model_repo_list:
             test_all_datasets(hf_model_repo, lang_pair, src_lang="ind_Latn", tgt_lang="eng_Latn")
