@@ -2,7 +2,11 @@
 
 As the models are too big to store in GitHub, they are stored in HuggingFace. However, if you choose to run the scripts that download the models locally from HuggingFace, they will be stored in this folder.
 
-The links to the models are provided below:
-- Helsinki-NLP/opus-mt-en-id : https://huggingface.co/Helsinki-NLP/opus-mt-en-id
-- Helsinki-NLP/opus-mt-id-en : https://huggingface.co/Helsinki-NLP/opus-mt-id-en
-- 
+All of my models are available on my HuggingFace profile publicly.
+
+My profile: https://huggingface.co/yonathanstwn
+
+The highlight of the project is the EColIndo models. There are several versions:
+- https://huggingface.co/yonathanstwn/opus-ecolindo-best-loss-bleu
+- https://huggingface.co/yonathanstwn/nllb-ecolindo-best-bleu
+- https://huggingface.co/yonathanstwn/nllb-ecolindo-best-loss
