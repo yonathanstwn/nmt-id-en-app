@@ -361,55 +361,55 @@ def main(runner_config):
     # Test all 3 ecolindo metrics
     elif runner_config == RunnerConfig.TEST_ALL_ECOLINDO.value:
 
-        # # Test baseline en-id opus-mt model and all 4 ecolindo models on ecolindo dataset test split.
-        # hf_model_repo_list = [
-        #     "Helsinki-NLP/opus-mt-id-en",
-        #     "yonathanstwn/opus-ecolindo-best-loss-bleu",
-        #     "yonathanstwn/nllb-ecolindo-best-loss",
-        #     "yonathanstwn/nllb-ecolindo-best-bleu",
-        # ]
-        # lang_pair = 'english-colloquial_indo'
-        # for hf_model_repo in hf_model_repo_list:
-        #     ds = datasetLoaders.get_ecolindo_test_ds()
-        #     results = api.test(
-        #         hf_model_repo, ds['test'], lang_pair, src_lang="eng_Latn", tgt_lang="ind_Latn")
-        #     model_results = {
-        #         "model": hf_model_repo,
-        #         "test_dataset": 'ecolindo',
-        #         "language_pair": lang_pair,
-        #         "test_loss": results["test_loss"],
-        #         "test_bleu": results["test_bleu"],
-        #         "test_runtime": results["test_runtime"]
-        #     }
-        #     append_to_test_results_file(model_results)
+        # Test baseline en-id opus-mt model and all 4 ecolindo models on ecolindo dataset test split.
+        hf_model_repo_list = [
+            "Helsinki-NLP/opus-mt-id-en",
+            "yonathanstwn/opus-ecolindo-best-loss-bleu",
+            "yonathanstwn/nllb-ecolindo-best-loss",
+            "yonathanstwn/nllb-ecolindo-best-bleu",
+        ]
+        lang_pair = 'english-colloquial_indo'
+        for hf_model_repo in hf_model_repo_list:
+            ds = datasetLoaders.get_ecolindo_test_ds()
+            results = api.test(
+                hf_model_repo, ds['test'], lang_pair, src_lang="eng_Latn", tgt_lang="ind_Latn")
+            model_results = {
+                "model": hf_model_repo,
+                "test_dataset": 'ecolindo',
+                "language_pair": lang_pair,
+                "test_loss": results["test_loss"],
+                "test_bleu": results["test_bleu"],
+                "test_runtime": results["test_runtime"]
+            }
+            append_to_test_results_file(model_results)
 
-        # # Backtranslation using id-en opus-mt on formal and colloquial sentences.
-        # model = "Helsinki-NLP/opus-mt-id-en"
-        # ds = datasetLoaders.get_ecolindo_test_ds()
-        # # formal
-        # lang_pair = 'formal_indo-en'
-        # results = api.test(model, ds['test'], lang_pair)
-        # model_results = {
-        #     "model": model,
-        #     "test_dataset": 'ecolindo',
-        #     "language_pair": lang_pair,
-        #     "test_loss": results["test_loss"],
-        #     "test_bleu": results["test_bleu"],
-        #     "test_runtime": results["test_runtime"]
-        # }
-        # append_to_test_results_file(model_results)
-        # # colloquial
-        # lang_pair = 'colloquial_indo-en'
-        # api.test(model, ds['test'], lang_pair)
-        # model_results = {
-        #     "model": model,
-        #     "test_dataset": 'ecolindo',
-        #     "language_pair": lang_pair,
-        #     "test_loss": results["test_loss"],
-        #     "test_bleu": results["test_bleu"],
-        #     "test_runtime": results["test_runtime"]
-        # }
-        # append_to_test_results_file(model_results)
+        # Backtranslation using id-en opus-mt on formal and colloquial sentences.
+        model = "Helsinki-NLP/opus-mt-id-en"
+        ds = datasetLoaders.get_ecolindo_test_ds()
+        # formal
+        lang_pair = 'formal_indo-en'
+        results = api.test(model, ds['test'], lang_pair)
+        model_results = {
+            "model": model,
+            "test_dataset": 'ecolindo',
+            "language_pair": lang_pair,
+            "test_loss": results["test_loss"],
+            "test_bleu": results["test_bleu"],
+            "test_runtime": results["test_runtime"]
+        }
+        append_to_test_results_file(model_results)
+        # colloquial
+        lang_pair = 'colloquial_indo-en'
+        api.test(model, ds['test'], lang_pair)
+        model_results = {
+            "model": model,
+            "test_dataset": 'ecolindo',
+            "language_pair": lang_pair,
+            "test_loss": results["test_loss"],
+            "test_bleu": results["test_bleu"],
+            "test_runtime": results["test_runtime"]
+        }
+        append_to_test_results_file(model_results)
 
         # Count number of colloquial words in formal and colloquial columns of ecolindo dataset.
         ds = datasetLoaders.get_ecolindo_train_val_ds()
