@@ -76,6 +76,9 @@ class RunnerConfig(Enum):
     # Finetune NLLB (english to indonesian) model with GPT-generated ecolindo dataset
     TRAIN_NLLB_ECOLINDO = 'TRAIN_NLLB_ECOLINDO'
 
+    # Perform all 3 test metrics for assessing ecolindo
+    TEST_ALL_ECOLINDO = 'TEST_ALL_ECOLINDO'
+
 
 def append_to_test_results_file(results):
     """
@@ -124,7 +127,7 @@ def test_all_datasets(hf_model_repo, lang_pair, **kwargs):
         'flores200_devtest_testset': datasetLoaders.get_flores_test_ds('devtest', '200')
     }
 
-    # Test the model on every dataset and record individual results to the test_results.json file. 
+    # Test the model on every dataset and record individual results to the test_results.json file.
     for ds_name, ds in dataset_names_to_datasets.items():
         results = api.test(hf_model_repo, ds['test'], lang_pair, **kwargs)
         model_results = {
@@ -264,7 +267,7 @@ def main(runner_config):
         api.train("facebook/nllb-200-distilled-600M",
                   'nllb-id-en-ccmatrix', dataset, 'id-en', base_model_dir="nllb-id-en",
                   lr=1e-5, epochs_n=10, src_lang="ind_Latn", tgt_lang="eng_Latn")
-        
+
     ###################################################
     ############ OPUS ECOLINDO TRAIN ##################
     ###################################################
@@ -292,7 +295,7 @@ def main(runner_config):
 
     # Tests all successful and best Helsinki-OPUS model checkpoints based on val_bleu and val_loss
     elif runner_config == RunnerConfig.TEST_ALL_OPUS.value:
-        
+
         # All models for English -> Indonesian translations
         hf_model_repo_list = [
             "Helsinki-NLP/opus-mt-en-id",
@@ -303,11 +306,11 @@ def main(runner_config):
             "yonathanstwn/opus-mt-en-id-ccmatrix-lr-3",
             "yonathanstwn/opus-mt-en-id-ccmatrix-v2-best-loss-bleu",
             "yonathanstwn/opus-mt-en-id-jakarta-best-loss-bleu",
-            ]
+        ]
         lang_pair = 'en-id'
         for hf_model_repo in hf_model_repo_list:
             test_all_datasets(hf_model_repo, lang_pair)
-        
+
         # All models for Indonesian -> English translations
         hf_model_repo_list = [
             "Helsinki-NLP/opus-mt-id-en",
@@ -317,7 +320,7 @@ def main(runner_config):
             "yonathanstwn/opus-mt-id-en-ccmatrix-warmup-best-bleu",
             "yonathanstwn/opus-mt-id-en-ccmatrix-no-warmup-best-loss",
             "yonathanstwn/opus-mt-id-en-ccmatrix-no-warmup-best-bleu",
-            ]
+        ]
         lang_pair = 'id-en'
         for hf_model_repo in hf_model_repo_list:
             test_all_datasets(hf_model_repo, lang_pair)
@@ -328,26 +331,107 @@ def main(runner_config):
 
     # Tests all successful and best NLLB model checkpoints based on val_bleu and val_loss
     elif runner_config == RunnerConfig.TEST_ALL_NLLB.value:
-        
+
         # All models for English -> Indonesian translations
         hf_model_repo_list = [
             "facebook/nllb-200-distilled-600M",
             "yonathanstwn/nllb-en-id-ccmatrix-best-loss",
             "yonathanstwn/nllb-en-id-ccmatrix-best-bleu",
-            ]
+        ]
         lang_pair = 'en-id'
         for hf_model_repo in hf_model_repo_list:
-            test_all_datasets(hf_model_repo, lang_pair, src_lang="eng_Latn", tgt_lang="ind_Latn")
-        
+            test_all_datasets(hf_model_repo, lang_pair,
+                              src_lang="eng_Latn", tgt_lang="ind_Latn")
+
         # All models for Indonesian -> English translations
         hf_model_repo_list = [
             "facebook/nllb-200-distilled-600M",
             "yonathanstwn/nllb-id-en-ccmatrix-best-loss",
             "yonathanstwn/nllb-id-en-ccmatrix-best-bleu",
-            ]
+        ]
         lang_pair = 'id-en'
         for hf_model_repo in hf_model_repo_list:
-            test_all_datasets(hf_model_repo, lang_pair, src_lang="ind_Latn", tgt_lang="eng_Latn")
+            test_all_datasets(hf_model_repo, lang_pair,
+                              src_lang="ind_Latn", tgt_lang="eng_Latn")
+
+    ###################################################
+    ########### TESTING ALL ECOLINDO METRICS ##########
+    ###################################################
+
+    # Test all 3 ecolindo metrics
+    elif runner_config == RunnerConfig.TEST_ALL_ECOLINDO.value:
+
+        # # Test baseline en-id opus-mt model and all 4 ecolindo models on ecolindo dataset test split.
+        # hf_model_repo_list = [
+        #     "Helsinki-NLP/opus-mt-id-en",
+        #     "yonathanstwn/opus-ecolindo-best-loss-bleu",
+        #     "yonathanstwn/nllb-ecolindo-best-loss",
+        #     "yonathanstwn/nllb-ecolindo-best-bleu",
+        # ]
+        # lang_pair = 'english-colloquial_indo'
+        # for hf_model_repo in hf_model_repo_list:
+        #     ds = datasetLoaders.get_ecolindo_test_ds()
+        #     results = api.test(
+        #         hf_model_repo, ds['test'], lang_pair, src_lang="eng_Latn", tgt_lang="ind_Latn")
+        #     model_results = {
+        #         "model": hf_model_repo,
+        #         "test_dataset": 'ecolindo',
+        #         "language_pair": lang_pair,
+        #         "test_loss": results["test_loss"],
+        #         "test_bleu": results["test_bleu"],
+        #         "test_runtime": results["test_runtime"]
+        #     }
+        #     append_to_test_results_file(model_results)
+
+        # # Backtranslation using id-en opus-mt on formal and colloquial sentences.
+        # model = "Helsinki-NLP/opus-mt-id-en"
+        # ds = datasetLoaders.get_ecolindo_test_ds()
+        # # formal
+        # lang_pair = 'formal_indo-en'
+        # results = api.test(model, ds['test'], lang_pair)
+        # model_results = {
+        #     "model": model,
+        #     "test_dataset": 'ecolindo',
+        #     "language_pair": lang_pair,
+        #     "test_loss": results["test_loss"],
+        #     "test_bleu": results["test_bleu"],
+        #     "test_runtime": results["test_runtime"]
+        # }
+        # append_to_test_results_file(model_results)
+        # # colloquial
+        # lang_pair = 'colloquial_indo-en'
+        # api.test(model, ds['test'], lang_pair)
+        # model_results = {
+        #     "model": model,
+        #     "test_dataset": 'ecolindo',
+        #     "language_pair": lang_pair,
+        #     "test_loss": results["test_loss"],
+        #     "test_bleu": results["test_bleu"],
+        #     "test_runtime": results["test_runtime"]
+        # }
+        # append_to_test_results_file(model_results)
+
+        # Count number of colloquial words in formal and colloquial columns of ecolindo dataset.
+        ds = datasetLoaders.get_ecolindo_train_val_ds()
+        words = ['ngapain', 'gue', 'lu', 'mau', 'nggak',
+                 'kamu', 'sih', 'ke', 'ya', 'kok']
+        word_counts_col = {word: 0 for word in words}
+        word_counts_formal = {word: 0 for word in words}
+        for row in ds['train']['translation']:
+            col_sentence = row['colloquial_indo'].lower().split(" ")
+            formal_sentence = row['formal_indo'].lower().split(" ")
+            for word in words:
+                if word in col_sentence:
+                    word_counts_col[word] += 1
+                if word in formal_sentence:
+                    word_counts_formal[word] += 1
+        results = {
+            "test_name": "word_count_formal_vs_informal_in_ecolindo_ds",
+            "test_dataset": 'ecolindo',
+            "word_counts_formal": word_counts_formal,
+            "word_counts_col": word_counts_col
+        }
+        append_to_test_results_file(results)
 
 
 if __name__ == '__main__':

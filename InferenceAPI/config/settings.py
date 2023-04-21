@@ -10,9 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-import os
 from pathlib import Path
-from django.contrib.messages import constants as message_constants
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-rq)i0%0$i!_&sa*to+@-840%+ge^(d4jp%&xu6-nv-n8i0x!gk'
+SECRET_KEY = 'django-insecure-#&+p)fda3!_oi8r+nbn$f32m4^sou(ezqxql64xkg-%&qbk14d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -46,7 +44,6 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -121,20 +118,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Login related configurations
-LOGIN_URL = 'login'
-REDIRECT_URL_WHEN_LOGGED_IN = 'main'
-
-# Microservices API ports
-INFERENCE_API = 'http://localhost:8001/'
-TRAIN_API = 'http://localhost:8002/'
-
+# Active Models List
+MODEL_NAMES = {
+    'FID-EN': "yonathanstwn/opus-mt-id-en-ccmatrix-warmup-best-bleu",
+    'EN-FID': "yonathanstwn/opus-mt-en-id-ccmatrix-lr-5-best-bleu",
+    'EN-CID': 'yonathanstwn/opus-ecolindo-best-loss-bleu',
+    'CID-EN': 'yonathanstwn/opus-mt-id-en-ccmatrix-warmup-best-bleu',
+}

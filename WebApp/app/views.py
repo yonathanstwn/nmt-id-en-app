@@ -6,7 +6,9 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from googletrans import Translator
+import requests
+from app.models import UserFeedback
+from config.settings import TRAIN_API, INFERENCE_API
 
 
 def login_prohibited(view_function):
@@ -62,23 +64,16 @@ def main(request):
         response_data = _process_lang_params(fromL, toL)
         return render(request, 'main.html', response_data)
     else:
-        translator = Translator()
         fromL = request.POST['fromL']
         toL = request.POST['toL']
         srcText = request.POST['sourceText']
         outText = ''
-        if srcText:
-            if fromL == 'FID' or fromL == 'CID':
-                outText = translator.translate(
-                    srcText, src='id', dest='en').text
-            else:
-                outText = translator.translate(
-                    srcText, src='en', dest='id').text
+        response = requests.post(INFERENCE_API + "translations/",
+                                 data={'lang_pair': fromL + '-' + toL, 'source_sentence': srcText})
+        outText = response.content.decode('utf-8')
         response_data = _process_lang_params(fromL, toL)
         return render(request, 'main.html', {**response_data, 'sourceText': srcText, 'outText': outText})
 
-def _retrain_model(feedbackText):
-    pass
 
 @login_required
 def feedback(request):
@@ -90,8 +85,16 @@ def feedback(request):
         response_data = _process_lang_params(fromL, toL)
         return render(request, 'feedback.html', {**response_data, 'sourceText': srcText, 'outText': outText})
     else:
+        fromL = request.POST['fromL']
+        toL = request.POST['toL']
+        srcText = request.POST['sourceText']
         feedbackText = request.POST['feedbackText']
-        _retrain_model(feedbackText)
+        # check feedback quality
+        response = requests.post(INFERENCE_API + "check_feedback/", data={
+                                'source_sentence': srcText, 'feedback_sentence': feedbackText, 'lang_pair': fromL + '-' + toL})
+        if response.content.decode('utf-8') == 'True':
+            UserFeedback.objects.create(
+                src_text=srcText, target_text=feedbackText, lang_pair=fromL + '-' + toL)
         return redirect('main')
 
 

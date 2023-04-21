@@ -3,7 +3,7 @@ Main public API functions to be called by outside scripts
 """
 
 import shutil
-import utils
+import Transformers.utils as utils
 from transformers import Seq2SeqTrainingArguments
 
 

@@ -10,9 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-import os
 from pathlib import Path
-from django.contrib.messages import constants as message_constants
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-rq)i0%0$i!_&sa*to+@-840%+ge^(d4jp%&xu6-nv-n8i0x!gk'
+SECRET_KEY = 'django-insecure-+p1x11_7xnu1ysgh%mb^bb$n=cczo2kvsxnt!kwrq7(#1k^+b&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -121,20 +119,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# Login related configurations
-LOGIN_URL = 'login'
-REDIRECT_URL_WHEN_LOGGED_IN = 'main'
-
-# Microservices API ports
-INFERENCE_API = 'http://localhost:8001/'
-TRAIN_API = 'http://localhost:8002/'
-
