@@ -124,3 +124,11 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Active Models List
+MODEL_NAMES = {
+    'FID-EN': "yonathanstwn/opus-mt-id-en-ccmatrix-warmup-best-bleu",
+    'EN-FID': "yonathanstwn/opus-mt-en-id-ccmatrix-lr-5-best-bleu",
+    'EN-CID': 'yonathanstwn/opus-ecolindo-best-loss-bleu',
+    'CID-EN': 'yonathanstwn/opus-mt-id-en-ccmatrix-warmup-best-bleu',
+}

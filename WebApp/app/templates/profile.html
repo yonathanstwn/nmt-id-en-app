@@ -1,0 +1,51 @@
+{% extends 'index.html' %} 
+{% block body %} 
+  {% include 'partials/navbar.html' %}
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-12">
+        <a href="{% url 'main' %}" class="btn btn-secondary mb-3">
+            <i class="bi bi-arrow-left"></i> Back
+        </a>
+    </br></br></br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="card text-white bg-dark">
+          <div class="card-header card-header-custom" style="height: 60px">
+              <h4>{{ name }}</h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <h5>Email:</h5>
+              </div>
+              <div class="col-md-6">
+                <p>{{ email }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <h5>Past translations:</h5>
+              </div>
+              <div class="col-md-6">
+                <p>{{ translations_count }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <h5>Feedback Given:</h5>
+              </div>
+              <div class="col-md-6">
+                <p>{{ feedback_count }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

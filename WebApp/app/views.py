@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 import requests
+from app.models import UserData
 from app.models import UserFeedback
 from config.settings import TRAIN_API, INFERENCE_API
 
@@ -72,6 +73,12 @@ def main(request):
                                  data={'lang_pair': fromL + '-' + toL, 'source_sentence': srcText})
         outText = response.content.decode('utf-8')
         response_data = _process_lang_params(fromL, toL)
+        try:
+            user_data = UserData.objects.get(user=request.user)
+        except:
+            user_data = UserData.objects.create(user=request.user, translations_count=0, feedback_count=0)
+        user_data.translations_count += 1
+        user_data.save()
         return render(request, 'main.html', {**response_data, 'sourceText': srcText, 'outText': outText})
 
 
@@ -95,6 +102,12 @@ def feedback(request):
         if response.content.decode('utf-8') == 'True':
             UserFeedback.objects.create(
                 src_text=srcText, target_text=feedbackText, lang_pair=fromL + '-' + toL)
+        try:
+            user_data = UserData.objects.get(user=request.user)
+        except:
+            user_data = UserData.objects.create(user=request.user, translations_count=0, feedback_count=0)
+        user_data.feedback_count += 1
+        user_data.save()
         return redirect('main')
 
 
@@ -159,3 +172,20 @@ def sign_up(request):
                 return redirect('main')
 
     return render(request, 'signup.html', {'form': form})
+
+def profile(request):
+    name = request.user.get_full_name()
+    email = request.user.email
+    try:
+        translations_count = UserData.objects.get(user=request.user).translations_count
+        feedback_count = UserData.objects.get(user=request.user).feedback_count
+    except:
+        translations_count = 0
+        feedback_count = 0
+    return render(request, 'profile.html', {
+        'name': name,
+        'email': email,
+        'translations_count': translations_count,
+        'feedback_count': feedback_count,
+    }
+    )

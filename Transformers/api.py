@@ -16,6 +16,7 @@ def train(hf_model_repo,
           lr=1e-4,
           epochs_n=25,
           warmup_steps=4000,
+          push_to_hub=True,
           **kwargs
           ):
     """
@@ -27,12 +28,19 @@ def train(hf_model_repo,
     access_tokens = utils.get_access_tokens()
     tokenized_dataset = utils.tokenize_dataset(dataset, tokenizer, lang_pair)
     compute_metrics_function = utils.create_compute_metrics_function(tokenizer)
+
+    upload_token = None
+    if push_to_hub:
+        upload_token = access_tokens['upload_token']
+
     training_args = utils.init_training_args(
-        model_name, access_tokens['upload_token'], lr, epochs_n, warmup_steps)
+        model_name, upload_token, lr, epochs_n, warmup_steps)
     trainer = utils.init_trainer(
         model, training_args, tokenized_dataset, tokenizer, compute_metrics_function)
     trainer.train()
-    trainer.push_to_hub()
+    
+    if push_to_hub:
+        trainer.push_to_hub()
 
 
 def test(hf_model_repo, dataset, lang_pair, **kwargs):

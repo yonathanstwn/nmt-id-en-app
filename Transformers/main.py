@@ -387,7 +387,7 @@ def main(runner_config):
         model = "Helsinki-NLP/opus-mt-id-en"
         ds = datasetLoaders.get_ecolindo_test_ds()
         # formal
-        lang_pair = 'formal_indo-en'
+        lang_pair = 'formal_indo-english'
         results = api.test(model, ds['test'], lang_pair)
         model_results = {
             "model": model,
@@ -399,7 +399,7 @@ def main(runner_config):
         }
         append_to_test_results_file(model_results)
         # colloquial
-        lang_pair = 'colloquial_indo-en'
+        lang_pair = 'colloquial_indo-english'
         api.test(model, ds['test'], lang_pair)
         model_results = {
             "model": model,
