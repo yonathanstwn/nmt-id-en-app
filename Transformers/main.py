@@ -400,7 +400,7 @@ def main(runner_config):
         append_to_test_results_file(model_results)
         # colloquial
         lang_pair = 'colloquial_indo-english'
-        api.test(model, ds['test'], lang_pair)
+        results = api.test(model, ds['test'], lang_pair)
         model_results = {
             "model": model,
             "test_dataset": 'ecolindo',
