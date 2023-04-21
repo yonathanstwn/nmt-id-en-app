@@ -1053,7 +1053,7 @@
             "test_dataset": "ecolindo",
             "language_pair": "colloquial_indo-english",
             "test_loss": 1.137495756149292,
-            "test_bleu": 40.9951,
+            "test_bleu": 37.1632,
             "test_runtime": 127.2667
         },
         {
