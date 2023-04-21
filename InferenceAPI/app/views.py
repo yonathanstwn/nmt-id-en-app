@@ -1,11 +1,11 @@
+import sacrebleu
+import sys
+sys.path.append('..')
+from Transformers.api import translate
+from Transformers.utils import load_model_and_tokenizer
 import os
 from django.http import HttpResponse
 from config.settings import MODEL_NAMES
-import sys
-sys.path.append('..')
-from Transformers.utils import load_model_and_tokenizer
-from Transformers.api import translate
-import evaluate
 
 models_storage_dir = '/'.join(os.getcwd().split("/")[:-1]) + '/Transformers'
 
@@ -21,6 +21,7 @@ def _load_models():
     # change back to current dir after loading
     os.chdir(current_dir)
 
+
 # Load models when starting app
 print("LOADING MODELS...")
 models = {}
@@ -28,20 +29,24 @@ tokenizers = {}
 _load_models()
 print("LOADING MODELS DONE")
 
+
 def translations(request):
     """Translate API"""
     lang_pair = request.POST.get('lang_pair')
     source_sentence = request.POST.get('source_sentence')
-    target_sentence = translate(models[lang_pair], tokenizers[lang_pair], source_sentence)
+    target_sentence = translate(
+        models[lang_pair], tokenizers[lang_pair], source_sentence)
     return HttpResponse(target_sentence)
+
 
 def update(request):
     """Update API for when models just get updated from re-training to update the local models here"""
     _load_models()
 
+
 def check_feedback(request):
     """API for checking quality of user feedback with backtranslation"""
-    
+
     # BLEU THRESHOLD CONSTANT
     BLEU_THRESHOLD = 40
 
@@ -51,15 +56,13 @@ def check_feedback(request):
     reverse_lang_pair = "-".join(lang_pair.split("-")[::-1])
     reverse_model = models[reverse_lang_pair]
     reverse_tokenizer = tokenizers[reverse_lang_pair]
-    backtranslation = translate(reverse_model, reverse_tokenizer, feedback_sentence)
-    sacrebleu = evaluate.load('sacrebleu')
-    print(backtranslation)
-    print(source_sentence)
-    score = sacrebleu.corpus_bleu(
-            predictions=[backtranslation], references=[source_sentence])
-    print(score)
-    if score > BLEU_THRESHOLD:
+    backtranslation = translate(
+        reverse_model, reverse_tokenizer, feedback_sentence)
+    print(backtranslation.lower().strip())
+    print(source_sentence.lower().strip())
+    result = sacrebleu.raw_corpus_bleu([source_sentence.lower().strip()], [[backtranslation.lower().strip()]])
+    print(result.score)
+    if result.score > BLEU_THRESHOLD:
         return HttpResponse('True')
     else:
         return HttpResponse('False')
-    

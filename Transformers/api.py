@@ -1,9 +1,10 @@
 """
 Main public API functions to be called by outside scripts
 """
-
+import sys
+sys.path.append('..')
 import shutil
-import Transformers.utils as utils
+from Transformers import utils
 from transformers import Seq2SeqTrainingArguments
 
 

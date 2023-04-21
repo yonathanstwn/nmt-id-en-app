@@ -152,7 +152,7 @@ def main(runner_config):
     if runner_config == RunnerConfig.TRAIN_OPUS_EN_ID_CCMATRIX_LR_3.value:
         dataset = datasetLoaders.get_ccmatrix_train_val_ds()
         api.train("Helsinki-NLP/opus-mt-en-id",
-                  'opus-mt-en-id-ccmatrix-lr-3', dataset, 'en-id', lr=1e-3)
+                  'opus-mt-en-id-ccmatrix-lr-10000', dataset, 'en-id', lr=1e-3)
     elif runner_config == RunnerConfig.TRAIN_OPUS_EN_ID_CCMATRIX_LR_4.value:
         dataset = datasetLoaders.get_ccmatrix_train_val_ds()
         api.train("Helsinki-NLP/opus-mt-en-id",
