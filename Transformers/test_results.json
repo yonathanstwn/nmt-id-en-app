@@ -1,0 +1,1089 @@
+{
+    "results": [
+        {
+            "model": "facebook/nllb-200-distilled-600M",
+            "test_dataset": "opus100_testset",
+            "language_pair": "en-id",
+            "test_loss": 3.6193764209747314,
+            "test_bleu": 1.9981,
+            "test_runtime": 34.4842
+        },
+        {
+            "model": "facebook/nllb-200-distilled-600M",
+            "test_dataset": "tatoeba_testset",
+            "language_pair": "en-id",
+            "test_loss": 3.3855700492858887,
+            "test_bleu": 0.4465,
+            "test_runtime": 42.0601
+        },
+        {
+            "model": "facebook/nllb-200-distilled-600M",
+            "test_dataset": "flores101_dev_testset",
+            "language_pair": "en-id",
+            "test_loss": 2.1811797618865967,
+            "test_bleu": 2.0302,
+            "test_runtime": 24.5276
+        },
+        {
+            "model": "facebook/nllb-200-distilled-600M",
+            "test_dataset": "flores101_devtest_testset",
+            "language_pair": "en-id",
+            "test_loss": 2.106492519378662,
+            "test_bleu": 1.7102,
+            "test_runtime": 33.6193
+        },
+        {
+            "model": "facebook/nllb-200-distilled-600M",
+            "test_dataset": "flores200_dev_testset",
+            "language_pair": "en-id",
+            "test_loss": 2.1811797618865967,
+            "test_bleu": 2.0302,
+            "test_runtime": 24.5882
+        },
+        {
+            "model": "facebook/nllb-200-distilled-600M",
+            "test_dataset": "flores200_devtest_testset",
+            "language_pair": "en-id",
+            "test_loss": 2.106492519378662,
+            "test_bleu": 1.7102,
+            "test_runtime": 33.6601
+        },
+        {
+            "model": "yonathanstwn/nllb-en-id-ccmatrix-best-loss",
+            "test_dataset": "opus100_testset",
+            "language_pair": "en-id",
+            "test_loss": 2.050795793533325,
+            "test_bleu": 27.1361,
+            "test_runtime": 22.3982
+        },
+        {
+            "model": "yonathanstwn/nllb-en-id-ccmatrix-best-loss",
+            "test_dataset": "tatoeba_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.1160870790481567,
+            "test_bleu": 35.5555,
+            "test_runtime": 32.6381
+        },
+        {
+            "model": "yonathanstwn/nllb-en-id-ccmatrix-best-loss",
+            "test_dataset": "flores101_dev_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.2944796085357666,
+            "test_bleu": 42.4146,
+            "test_runtime": 18.2535
+        },
+        {
+            "model": "yonathanstwn/nllb-en-id-ccmatrix-best-loss",
+            "test_dataset": "flores101_devtest_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.2549699544906616,
+            "test_bleu": 43.848,
+            "test_runtime": 19.8946
+        },
+        {
+            "model": "yonathanstwn/nllb-en-id-ccmatrix-best-loss",
+            "test_dataset": "flores200_dev_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.2944796085357666,
+            "test_bleu": 42.4146,
+            "test_runtime": 18.298
+        },
+        {
+            "model": "yonathanstwn/nllb-en-id-ccmatrix-best-loss",
+            "test_dataset": "flores200_devtest_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.2549699544906616,
+            "test_bleu": 43.848,
+            "test_runtime": 20.3157
+        },
+        {
+            "model": "yonathanstwn/nllb-en-id-ccmatrix-best-bleu",
+            "test_dataset": "opus100_testset",
+            "language_pair": "en-id",
+            "test_loss": 2.0537314414978027,
+            "test_bleu": 27.0921,
+            "test_runtime": 22.5244
+        },
+        {
+            "model": "yonathanstwn/nllb-en-id-ccmatrix-best-bleu",
+            "test_dataset": "tatoeba_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.1164186000823975,
+            "test_bleu": 35.4285,
+            "test_runtime": 32.536
+        },
+        {
+            "model": "yonathanstwn/nllb-en-id-ccmatrix-best-bleu",
+            "test_dataset": "flores101_dev_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.296500325202942,
+            "test_bleu": 42.5377,
+            "test_runtime": 18.3532
+        },
+        {
+            "model": "yonathanstwn/nllb-en-id-ccmatrix-best-bleu",
+            "test_dataset": "flores101_devtest_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.256535530090332,
+            "test_bleu": 43.9019,
+            "test_runtime": 19.8709
+        },
+        {
+            "model": "yonathanstwn/nllb-en-id-ccmatrix-best-bleu",
+            "test_dataset": "flores200_dev_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.296500325202942,
+            "test_bleu": 42.5377,
+            "test_runtime": 18.2005
+        },
+        {
+            "model": "yonathanstwn/nllb-en-id-ccmatrix-best-bleu",
+            "test_dataset": "flores200_devtest_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.256535530090332,
+            "test_bleu": 43.9019,
+            "test_runtime": 19.8461
+        },
+        {
+            "model": "facebook/nllb-200-distilled-600M",
+            "test_dataset": "opus100_testset",
+            "language_pair": "id-en",
+            "test_loss": 3.3384575843811035,
+            "test_bleu": 1.9523,
+            "test_runtime": 29.1879
+        },
+        {
+            "model": "facebook/nllb-200-distilled-600M",
+            "test_dataset": "tatoeba_testset",
+            "language_pair": "id-en",
+            "test_loss": 3.122213363647461,
+            "test_bleu": 0.4199,
+            "test_runtime": 42.9941
+        },
+        {
+            "model": "facebook/nllb-200-distilled-600M",
+            "test_dataset": "flores101_dev_testset",
+            "language_pair": "id-en",
+            "test_loss": 2.158346652984619,
+            "test_bleu": 1.2122,
+            "test_runtime": 33.3365
+        },
+        {
+            "model": "facebook/nllb-200-distilled-600M",
+            "test_dataset": "flores101_devtest_testset",
+            "language_pair": "id-en",
+            "test_loss": 2.1777751445770264,
+            "test_bleu": 1.3081,
+            "test_runtime": 34.3019
+        },
+        {
+            "model": "facebook/nllb-200-distilled-600M",
+            "test_dataset": "flores200_dev_testset",
+            "language_pair": "id-en",
+            "test_loss": 2.158346652984619,
+            "test_bleu": 1.2122,
+            "test_runtime": 33.4585
+        },
+        {
+            "model": "facebook/nllb-200-distilled-600M",
+            "test_dataset": "flores200_devtest_testset",
+            "language_pair": "id-en",
+            "test_loss": 2.1777751445770264,
+            "test_bleu": 1.3081,
+            "test_runtime": 34.3021
+        },
+        {
+            "model": "yonathanstwn/nllb-id-en-ccmatrix-best-loss",
+            "test_dataset": "opus100_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.6381789445877075,
+            "test_bleu": 31.5386,
+            "test_runtime": 23.1413
+        },
+        {
+            "model": "yonathanstwn/nllb-id-en-ccmatrix-best-loss",
+            "test_dataset": "tatoeba_testset",
+            "language_pair": "id-en",
+            "test_loss": 0.7375421524047852,
+            "test_bleu": 43.8051,
+            "test_runtime": 34.3936
+        },
+        {
+            "model": "yonathanstwn/nllb-id-en-ccmatrix-best-loss",
+            "test_dataset": "flores101_dev_testset",
+            "language_pair": "id-en",
+            "test_loss": 0.9994322061538696,
+            "test_bleu": 42.1721,
+            "test_runtime": 19.4314
+        },
+        {
+            "model": "yonathanstwn/nllb-id-en-ccmatrix-best-loss",
+            "test_dataset": "flores101_devtest_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.0035154819488525,
+            "test_bleu": 41.5556,
+            "test_runtime": 21.1052
+        },
+        {
+            "model": "yonathanstwn/nllb-id-en-ccmatrix-best-loss",
+            "test_dataset": "flores200_dev_testset",
+            "language_pair": "id-en",
+            "test_loss": 0.9994322061538696,
+            "test_bleu": 42.1721,
+            "test_runtime": 19.3373
+        },
+        {
+            "model": "yonathanstwn/nllb-id-en-ccmatrix-best-loss",
+            "test_dataset": "flores200_devtest_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.0035154819488525,
+            "test_bleu": 41.5556,
+            "test_runtime": 21.0157
+        },
+        {
+            "model": "yonathanstwn/nllb-id-en-ccmatrix-best-bleu",
+            "test_dataset": "opus100_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.6448782682418823,
+            "test_bleu": 31.6273,
+            "test_runtime": 23.0682
+        },
+        {
+            "model": "yonathanstwn/nllb-id-en-ccmatrix-best-bleu",
+            "test_dataset": "tatoeba_testset",
+            "language_pair": "id-en",
+            "test_loss": 0.7405123114585876,
+            "test_bleu": 43.848,
+            "test_runtime": 34.4272
+        },
+        {
+            "model": "yonathanstwn/nllb-id-en-ccmatrix-best-bleu",
+            "test_dataset": "flores101_dev_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.0040448904037476,
+            "test_bleu": 42.3921,
+            "test_runtime": 19.3308
+        },
+        {
+            "model": "yonathanstwn/nllb-id-en-ccmatrix-best-bleu",
+            "test_dataset": "flores101_devtest_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.0080660581588745,
+            "test_bleu": 41.5542,
+            "test_runtime": 21.0349
+        },
+        {
+            "model": "yonathanstwn/nllb-id-en-ccmatrix-best-bleu",
+            "test_dataset": "flores200_dev_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.0040448904037476,
+            "test_bleu": 42.3921,
+            "test_runtime": 19.3446
+        },
+        {
+            "model": "yonathanstwn/nllb-id-en-ccmatrix-best-bleu",
+            "test_dataset": "flores200_devtest_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.0080660581588745,
+            "test_bleu": 41.5542,
+            "test_runtime": 21.3991
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-en-id",
+            "test_dataset": "opus100_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.3157280683517456,
+            "test_bleu": 36.7868,
+            "test_runtime": 36.1959
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-en-id",
+            "test_dataset": "tatoeba_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.0395649671554565,
+            "test_bleu": 39.1834,
+            "test_runtime": 53.0389
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-en-id",
+            "test_dataset": "flores101_dev_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.5131937265396118,
+            "test_bleu": 37.2157,
+            "test_runtime": 23.0645
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-en-id",
+            "test_dataset": "flores101_devtest_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.4796953201293945,
+            "test_bleu": 38.534,
+            "test_runtime": 23.9572
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-en-id",
+            "test_dataset": "flores200_dev_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.5131937265396118,
+            "test_bleu": 37.2157,
+            "test_runtime": 22.982
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-en-id",
+            "test_dataset": "flores200_devtest_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.4796953201293945,
+            "test_bleu": 38.534,
+            "test_runtime": 23.9541
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-5-best-loss",
+            "test_dataset": "opus100_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.8705302476882935,
+            "test_bleu": 29.5771,
+            "test_runtime": 30.0424
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-5-best-loss",
+            "test_dataset": "tatoeba_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.1705840826034546,
+            "test_bleu": 37.0171,
+            "test_runtime": 54.1801
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-5-best-loss",
+            "test_dataset": "flores101_dev_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.5917567014694214,
+            "test_bleu": 41.4106,
+            "test_runtime": 22.9443
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-5-best-loss",
+            "test_dataset": "flores101_devtest_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.5651359558105469,
+            "test_bleu": 41.6843,
+            "test_runtime": 24.4924
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-5-best-loss",
+            "test_dataset": "flores200_dev_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.5917567014694214,
+            "test_bleu": 41.4106,
+            "test_runtime": 22.9271
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-5-best-loss",
+            "test_dataset": "flores200_devtest_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.5651359558105469,
+            "test_bleu": 41.6843,
+            "test_runtime": 24.4621
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-5-best-bleu",
+            "test_dataset": "opus100_testset",
+            "language_pair": "en-id",
+            "test_loss": 2.112142562866211,
+            "test_bleu": 29.0701,
+            "test_runtime": 29.961
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-5-best-bleu",
+            "test_dataset": "tatoeba_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.2925301790237427,
+            "test_bleu": 37.0328,
+            "test_runtime": 54.413
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-5-best-bleu",
+            "test_dataset": "flores101_dev_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.7509591579437256,
+            "test_bleu": 41.0453,
+            "test_runtime": 22.9643
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-5-best-bleu",
+            "test_dataset": "flores101_devtest_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.7344412803649902,
+            "test_bleu": 41.2176,
+            "test_runtime": 24.4044
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-5-best-bleu",
+            "test_dataset": "flores200_dev_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.7509591579437256,
+            "test_bleu": 41.0453,
+            "test_runtime": 22.8041
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-5-best-bleu",
+            "test_dataset": "flores200_devtest_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.7344412803649902,
+            "test_bleu": 41.2176,
+            "test_runtime": 24.2964
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-4-best-loss",
+            "test_dataset": "opus100_testset",
+            "language_pair": "en-id",
+            "test_loss": 2.6458089351654053,
+            "test_bleu": 26.0785,
+            "test_runtime": 29.9011
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-4-best-loss",
+            "test_dataset": "tatoeba_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.488661289215088,
+            "test_bleu": 34.564,
+            "test_runtime": 54.1654
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-4-best-loss",
+            "test_dataset": "flores101_dev_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.950413465499878,
+            "test_bleu": 38.0356,
+            "test_runtime": 22.8721
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-4-best-loss",
+            "test_dataset": "flores101_devtest_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.9548602104187012,
+            "test_bleu": 39.0623,
+            "test_runtime": 24.0644
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-4-best-loss",
+            "test_dataset": "flores200_dev_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.950413465499878,
+            "test_bleu": 38.0356,
+            "test_runtime": 22.9269
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-4-best-loss",
+            "test_dataset": "flores200_devtest_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.9548602104187012,
+            "test_bleu": 39.0623,
+            "test_runtime": 24.3155
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-4-best-bleu",
+            "test_dataset": "opus100_testset",
+            "language_pair": "en-id",
+            "test_loss": 4.249313831329346,
+            "test_bleu": 25.1948,
+            "test_runtime": 30.255
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-4-best-bleu",
+            "test_dataset": "tatoeba_testset",
+            "language_pair": "en-id",
+            "test_loss": 2.358603000640869,
+            "test_bleu": 35.2365,
+            "test_runtime": 54.5163
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-4-best-bleu",
+            "test_dataset": "flores101_dev_testset",
+            "language_pair": "en-id",
+            "test_loss": 2.9837396144866943,
+            "test_bleu": 38.4836,
+            "test_runtime": 23.0559
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-4-best-bleu",
+            "test_dataset": "flores101_devtest_testset",
+            "language_pair": "en-id",
+            "test_loss": 2.9775564670562744,
+            "test_bleu": 39.0588,
+            "test_runtime": 24.0928
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-4-best-bleu",
+            "test_dataset": "flores200_dev_testset",
+            "language_pair": "en-id",
+            "test_loss": 2.9837396144866943,
+            "test_bleu": 38.4836,
+            "test_runtime": 22.8487
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-4-best-bleu",
+            "test_dataset": "flores200_devtest_testset",
+            "language_pair": "en-id",
+            "test_loss": 2.9775564670562744,
+            "test_bleu": 39.0588,
+            "test_runtime": 24.1236
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-3",
+            "test_dataset": "opus100_testset",
+            "language_pair": "en-id",
+            "test_loss": 6.327810764312744,
+            "test_bleu": 0.06,
+            "test_runtime": 22.1746
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-3",
+            "test_dataset": "tatoeba_testset",
+            "language_pair": "en-id",
+            "test_loss": 5.307774543762207,
+            "test_bleu": 0.1612,
+            "test_runtime": 46.3358
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-3",
+            "test_dataset": "flores101_dev_testset",
+            "language_pair": "en-id",
+            "test_loss": 7.701479434967041,
+            "test_bleu": 0.0021,
+            "test_runtime": 11.5855
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-3",
+            "test_dataset": "flores101_devtest_testset",
+            "language_pair": "en-id",
+            "test_loss": 7.734226226806641,
+            "test_bleu": 0.0041,
+            "test_runtime": 11.823
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-3",
+            "test_dataset": "flores200_dev_testset",
+            "language_pair": "en-id",
+            "test_loss": 7.701479434967041,
+            "test_bleu": 0.0021,
+            "test_runtime": 12.5348
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-lr-3",
+            "test_dataset": "flores200_devtest_testset",
+            "language_pair": "en-id",
+            "test_loss": 7.734226226806641,
+            "test_bleu": 0.0041,
+            "test_runtime": 11.9006
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-v2-best-loss-bleu",
+            "test_dataset": "opus100_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.8967459201812744,
+            "test_bleu": 28.0733,
+            "test_runtime": 32.0602
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-v2-best-loss-bleu",
+            "test_dataset": "tatoeba_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.1098101139068604,
+            "test_bleu": 37.5146,
+            "test_runtime": 54.3035
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-v2-best-loss-bleu",
+            "test_dataset": "flores101_dev_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.3437491655349731,
+            "test_bleu": 43.2948,
+            "test_runtime": 22.8193
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-v2-best-loss-bleu",
+            "test_dataset": "flores101_devtest_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.3135262727737427,
+            "test_bleu": 44.2564,
+            "test_runtime": 24.2982
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-v2-best-loss-bleu",
+            "test_dataset": "flores200_dev_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.3437491655349731,
+            "test_bleu": 43.2948,
+            "test_runtime": 22.867
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-ccmatrix-v2-best-loss-bleu",
+            "test_dataset": "flores200_devtest_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.3135262727737427,
+            "test_bleu": 44.2564,
+            "test_runtime": 24.2481
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-jakarta-best-loss-bleu",
+            "test_dataset": "opus100_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.7449157238006592,
+            "test_bleu": 31.0646,
+            "test_runtime": 34.6359
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-jakarta-best-loss-bleu",
+            "test_dataset": "tatoeba_testset",
+            "language_pair": "en-id",
+            "test_loss": 1.3488842248916626,
+            "test_bleu": 35.4952,
+            "test_runtime": 53.3156
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-jakarta-best-loss-bleu",
+            "test_dataset": "flores101_dev_testset",
+            "language_pair": "en-id",
+            "test_loss": 2.1148247718811035,
+            "test_bleu": 38.3318,
+            "test_runtime": 22.8234
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-jakarta-best-loss-bleu",
+            "test_dataset": "flores101_devtest_testset",
+            "language_pair": "en-id",
+            "test_loss": 2.0462727546691895,
+            "test_bleu": 39.6166,
+            "test_runtime": 23.9835
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-jakarta-best-loss-bleu",
+            "test_dataset": "flores200_dev_testset",
+            "language_pair": "en-id",
+            "test_loss": 2.1148247718811035,
+            "test_bleu": 38.3318,
+            "test_runtime": 22.7793
+        },
+        {
+            "model": "yonathanstwn/opus-mt-en-id-jakarta-best-loss-bleu",
+            "test_dataset": "flores200_devtest_testset",
+            "language_pair": "en-id",
+            "test_loss": 2.0462727546691895,
+            "test_bleu": 39.6166,
+            "test_runtime": 23.868
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-id-en",
+            "test_dataset": "opus100_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.3017927408218384,
+            "test_bleu": 41.5825,
+            "test_runtime": 39.0482
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-id-en",
+            "test_dataset": "tatoeba_testset",
+            "language_pair": "id-en",
+            "test_loss": 0.8399922251701355,
+            "test_bleu": 47.2217,
+            "test_runtime": 77.2255
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-id-en",
+            "test_dataset": "flores101_dev_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.50954008102417,
+            "test_bleu": 35.1247,
+            "test_runtime": 33.8744
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-id-en",
+            "test_dataset": "flores101_devtest_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.5402214527130127,
+            "test_bleu": 33.441,
+            "test_runtime": 28.9556
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-id-en",
+            "test_dataset": "flores200_dev_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.50954008102417,
+            "test_bleu": 35.1247,
+            "test_runtime": 33.7962
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-id-en",
+            "test_dataset": "flores200_devtest_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.5402214527130127,
+            "test_bleu": 33.441,
+            "test_runtime": 29.3497
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-v2-best-loss-bleu",
+            "test_dataset": "opus100_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.6303629875183105,
+            "test_bleu": 32.6055,
+            "test_runtime": 37.4907
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-v2-best-loss-bleu",
+            "test_dataset": "tatoeba_testset",
+            "language_pair": "id-en",
+            "test_loss": 0.7640101909637451,
+            "test_bleu": 44.5837,
+            "test_runtime": 66.5511
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-v2-best-loss-bleu",
+            "test_dataset": "flores101_dev_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.2567261457443237,
+            "test_bleu": 39.1655,
+            "test_runtime": 28.3329
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-v2-best-loss-bleu",
+            "test_dataset": "flores101_devtest_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.2737224102020264,
+            "test_bleu": 38.4668,
+            "test_runtime": 29.8903
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-v2-best-loss-bleu",
+            "test_dataset": "flores200_dev_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.2567261457443237,
+            "test_bleu": 39.1655,
+            "test_runtime": 28.3342
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-v2-best-loss-bleu",
+            "test_dataset": "flores200_devtest_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.2737224102020264,
+            "test_bleu": 38.4668,
+            "test_runtime": 30.1111
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-jakarta-best-loss-bleu",
+            "test_dataset": "opus100_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.4463789463043213,
+            "test_bleu": 36.8404,
+            "test_runtime": 46.1835
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-jakarta-best-loss-bleu",
+            "test_dataset": "tatoeba_testset",
+            "language_pair": "id-en",
+            "test_loss": 0.8512890934944153,
+            "test_bleu": 43.59,
+            "test_runtime": 87.7992
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-jakarta-best-loss-bleu",
+            "test_dataset": "flores101_dev_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.7992244958877563,
+            "test_bleu": 31.9601,
+            "test_runtime": 28.5774
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-jakarta-best-loss-bleu",
+            "test_dataset": "flores101_devtest_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.8338420391082764,
+            "test_bleu": 30.0263,
+            "test_runtime": 30.383
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-jakarta-best-loss-bleu",
+            "test_dataset": "flores200_dev_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.7992244958877563,
+            "test_bleu": 31.9601,
+            "test_runtime": 28.6147
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-jakarta-best-loss-bleu",
+            "test_dataset": "flores200_devtest_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.8338420391082764,
+            "test_bleu": 30.0263,
+            "test_runtime": 30.5516
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-warmup-best-loss",
+            "test_dataset": "opus100_testset",
+            "language_pair": "id-en",
+            "test_loss": 2.3569469451904297,
+            "test_bleu": 28.0234,
+            "test_runtime": 54.6561
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-warmup-best-loss",
+            "test_dataset": "tatoeba_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.1238391399383545,
+            "test_bleu": 40.4235,
+            "test_runtime": 65.1352
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-warmup-best-loss",
+            "test_dataset": "flores101_dev_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.9552379846572876,
+            "test_bleu": 33.0537,
+            "test_runtime": 28.6069
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-warmup-best-loss",
+            "test_dataset": "flores101_devtest_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.9857505559921265,
+            "test_bleu": 32.201,
+            "test_runtime": 30.0196
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-warmup-best-loss",
+            "test_dataset": "flores200_dev_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.9552379846572876,
+            "test_bleu": 33.0537,
+            "test_runtime": 28.6465
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-warmup-best-loss",
+            "test_dataset": "flores200_devtest_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.9857505559921265,
+            "test_bleu": 32.201,
+            "test_runtime": 30.3895
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-warmup-best-bleu",
+            "test_dataset": "opus100_testset",
+            "language_pair": "id-en",
+            "test_loss": 3.363762140274048,
+            "test_bleu": 28.2479,
+            "test_runtime": 37.9055
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-warmup-best-bleu",
+            "test_dataset": "tatoeba_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.599596619606018,
+            "test_bleu": 39.8049,
+            "test_runtime": 64.8756
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-warmup-best-bleu",
+            "test_dataset": "flores101_dev_testset",
+            "language_pair": "id-en",
+            "test_loss": 2.6742608547210693,
+            "test_bleu": 33.7467,
+            "test_runtime": 28.3906
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-warmup-best-bleu",
+            "test_dataset": "flores101_devtest_testset",
+            "language_pair": "id-en",
+            "test_loss": 2.6983754634857178,
+            "test_bleu": 32.7473,
+            "test_runtime": 30.0402
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-warmup-best-bleu",
+            "test_dataset": "flores200_dev_testset",
+            "language_pair": "id-en",
+            "test_loss": 2.6742608547210693,
+            "test_bleu": 33.7467,
+            "test_runtime": 28.3967
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-warmup-best-bleu",
+            "test_dataset": "flores200_devtest_testset",
+            "language_pair": "id-en",
+            "test_loss": 2.6983754634857178,
+            "test_bleu": 32.7473,
+            "test_runtime": 30.3488
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-no-warmup-best-loss",
+            "test_dataset": "opus100_testset",
+            "language_pair": "id-en",
+            "test_loss": 2.3011474609375,
+            "test_bleu": 27.3708,
+            "test_runtime": 43.2387
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-no-warmup-best-loss",
+            "test_dataset": "tatoeba_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.1004606485366821,
+            "test_bleu": 39.8216,
+            "test_runtime": 64.9284
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-no-warmup-best-loss",
+            "test_dataset": "flores101_dev_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.9050596952438354,
+            "test_bleu": 33.2394,
+            "test_runtime": 28.4109
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-no-warmup-best-loss",
+            "test_dataset": "flores101_devtest_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.9650956392288208,
+            "test_bleu": 31.9542,
+            "test_runtime": 30.0713
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-no-warmup-best-loss",
+            "test_dataset": "flores200_dev_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.9050596952438354,
+            "test_bleu": 33.2394,
+            "test_runtime": 28.4688
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-no-warmup-best-loss",
+            "test_dataset": "flores200_devtest_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.9650956392288208,
+            "test_bleu": 31.9542,
+            "test_runtime": 30.1292
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-no-warmup-best-bleu",
+            "test_dataset": "opus100_testset",
+            "language_pair": "id-en",
+            "test_loss": 3.382639169692993,
+            "test_bleu": 28.0176,
+            "test_runtime": 43.3598
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-no-warmup-best-bleu",
+            "test_dataset": "tatoeba_testset",
+            "language_pair": "id-en",
+            "test_loss": 1.6070672273635864,
+            "test_bleu": 40.343,
+            "test_runtime": 64.809
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-no-warmup-best-bleu",
+            "test_dataset": "flores101_dev_testset",
+            "language_pair": "id-en",
+            "test_loss": 2.669356346130371,
+            "test_bleu": 33.619,
+            "test_runtime": 28.4235
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-no-warmup-best-bleu",
+            "test_dataset": "flores101_devtest_testset",
+            "language_pair": "id-en",
+            "test_loss": 2.6887550354003906,
+            "test_bleu": 32.8498,
+            "test_runtime": 29.9519
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-no-warmup-best-bleu",
+            "test_dataset": "flores200_dev_testset",
+            "language_pair": "id-en",
+            "test_loss": 2.669356346130371,
+            "test_bleu": 33.619,
+            "test_runtime": 28.4922
+        },
+        {
+            "model": "yonathanstwn/opus-mt-id-en-ccmatrix-no-warmup-best-bleu",
+            "test_dataset": "flores200_devtest_testset",
+            "language_pair": "id-en",
+            "test_loss": 2.6887550354003906,
+            "test_bleu": 32.8498,
+            "test_runtime": 29.9543
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-id-en",
+            "test_dataset": "ecolindo",
+            "language_pair": "english-colloquial_indo",
+            "test_loss": 6.193937301635742,
+            "test_bleu": 3.0853,
+            "test_runtime": 283.3088
+        },
+        {
+            "model": "yonathanstwn/opus-ecolindo-best-loss-bleu",
+            "test_dataset": "ecolindo",
+            "language_pair": "english-colloquial_indo",
+            "test_loss": 1.113252878189087,
+            "test_bleu": 35.6773,
+            "test_runtime": 32.8574
+        },
+        {
+            "model": "yonathanstwn/nllb-ecolindo-best-loss",
+            "test_dataset": "ecolindo",
+            "language_pair": "english-colloquial_indo",
+            "test_loss": 0.8844276666641235,
+            "test_bleu": 36.488,
+            "test_runtime": 17.9743
+        },
+        {
+            "model": "yonathanstwn/nllb-ecolindo-best-bleu",
+            "test_dataset": "ecolindo",
+            "language_pair": "english-colloquial_indo",
+            "test_loss": 0.8982807993888855,
+            "test_bleu": 35.6736,
+            "test_runtime": 17.4946
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-id-en",
+            "test_dataset": "ecolindo",
+            "language_pair": "formal_indo-english",
+            "test_loss": 1.137495756149292,
+            "test_bleu": 40.9951,
+            "test_runtime": 127.2667
+        },
+        {
+            "model": "Helsinki-NLP/opus-mt-id-en",
+            "test_dataset": "ecolindo",
+            "language_pair": "colloquial_indo-english",
+            "test_loss": 1.137495756149292,
+            "test_bleu": 40.9951,
+            "test_runtime": 127.2667
+        },
+        {
+            "test_name": "word_count_formal_vs_informal_in_ecolindo_ds",
+            "test_dataset": "ecolindo",
+            "word_counts_formal": {
+                "ngapain": 24,
+                "gue": 652,
+                "lu": 956,
+                "mau": 5338,
+                "nggak": 31,
+                "kamu": 10777,
+                "sih": 193,
+                "ke": 14762,
+                "ya": 2362,
+                "kok": 42
+            },
+            "word_counts_col": {
+                "ngapain": 2262,
+                "gue": 44881,
+                "lu": 20846,
+                "mau": 16572,
+                "nggak": 32938,
+                "kamu": 58410,
+                "sih": 4777,
+                "ke": 24397,
+                "ya": 5828,
+                "kok": 1596
+            }
+        }
+    ],
+    "number_of_tests": 133
+}
